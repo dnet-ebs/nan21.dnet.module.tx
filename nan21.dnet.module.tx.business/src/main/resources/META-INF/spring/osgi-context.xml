@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:osgi="http://www.springframework.org/schema/osgi"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/osgi
+		http://www.springframework.org/schema/osgi/spring-osgi.xsd">
+
+	<osgi:reference id="osgiSettings" cardinality="0..1"
+		interface="net.nan21.dnet.core.api.ISettings" />
+
+	<osgi:reference id="osgiDataSource" cardinality="0..1"
+		interface="javax.sql.DataSource"/>
+
+	<osgi:reference id="entityManagerFactory" cardinality="0..1"
+		interface="javax.persistence.EntityManagerFactory" />
+
+	<osgi:reference id="transactionManager" cardinality="0..1"
+		interface="org.springframework.transaction.PlatformTransactionManager" />
+
+	<osgi:list id="osgiEntityServiceFactories" cardinality="0..N"
+		interface="net.nan21.dnet.core.api.service.business.IEntityServiceFactory"/>
+
+	<osgi:service ref="entityServiceFactory" ranking="100"
+		interface="net.nan21.dnet.core.api.service.business.IEntityServiceFactory" />
+
+	<osgi:service ref="asgnTxServiceFactory"
+		interface="net.nan21.dnet.core.api.service.business.IAsgnTxServiceFactory"/>
+
+	<osgi:service ref="jobFactory" ranking="0"
+		interface="net.nan21.dnet.core.api.service.job.IJobFactory"/>
+
+</beans>

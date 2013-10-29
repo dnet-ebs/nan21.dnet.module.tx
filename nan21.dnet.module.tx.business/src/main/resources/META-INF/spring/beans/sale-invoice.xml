@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+			http://www.springframework.org/schema/beans
+				http://www.springframework.org/schema/beans/spring-beans.xsd
+			http://www.springframework.org/schema/context 
+				http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<bean id="SalesInvoice" scope="singleton" lazy-init="true"
+		class="net.nan21.dnet.module.tx.business.ext.sale.service.SalesInvoice_Service"/>				
+
+	<bean id="SalesInvoiceTax" scope="singleton" lazy-init="true"
+		class="net.nan21.dnet.module.tx.business.impl.sale.SalesInvoiceTax_Service"/>				
+
+	<bean id="SalesInvoiceLine" scope="singleton" lazy-init="true"
+		class="net.nan21.dnet.module.tx.business.ext.sale.service.SalesInvoiceLine_Service"/>				
+
+	<bean id="SalesInvoiceLineTax" scope="singleton" lazy-init="true"
+		class="net.nan21.dnet.module.tx.business.impl.sale.SalesInvoiceLineTax_Service"/>				
+</beans>

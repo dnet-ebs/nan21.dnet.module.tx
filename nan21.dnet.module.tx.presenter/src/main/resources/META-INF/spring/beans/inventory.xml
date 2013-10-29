@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+			http://www.springframework.org/schema/beans
+				http://www.springframework.org/schema/beans/spring-beans.xsd
+			http://www.springframework.org/schema/context 
+				http://www.springframework.org/schema/context/spring-context.xsd">
+	
+	<!-- ==================== InventoryIn ==================== -->
+		
+	<bean id="InventoryIn_Ds" scope="singleton" lazy-init="true"
+		class="net.nan21.dnet.core.presenter.service.ds.DefaultEntityDsService">
+		<property name="modelClass" value="net.nan21.dnet.module.tx.presenter.impl.inventory.model.InventoryIn_Ds"/>
+		<property name="entityClass" value="net.nan21.dnet.module.tx.domain.impl.inventory.InventoryTransaction"/>
+	</bean>
+	
+	<!-- ==================== InventoryTransactionLine ==================== -->
+		
+	<bean id="InventoryTransactionLine_Ds" scope="singleton" lazy-init="true"
+		class="net.nan21.dnet.core.presenter.service.ds.DefaultEntityDsService">
+		<property name="modelClass" value="net.nan21.dnet.module.tx.presenter.impl.inventory.model.InventoryTransactionLine_Ds"/>
+		<property name="entityClass" value="net.nan21.dnet.module.tx.domain.impl.inventory.InventoryTransactionLine"/>
+	</bean>
+	
+	<!-- ==================== InventoryOperation ==================== -->
+		
+	<bean id="InventoryOperation_Ds" scope="singleton" lazy-init="true"
+		class="net.nan21.dnet.core.presenter.service.ds.DefaultEntityDsService">
+		<property name="modelClass" value="net.nan21.dnet.module.tx.presenter.impl.inventory.model.InventoryOperation_Ds"/>
+		<property name="filterClass" value="net.nan21.dnet.module.tx.presenter.impl.inventory.model.InventoryOperation_DsFilter"/>
+		<property name="entityClass" value="net.nan21.dnet.module.tx.domain.impl.inventory.InventoryOperation"/>
+		<property name="readOnly" value="true" />
+	</bean>
+	
+	<!-- ==================== Stock ==================== -->
+		
+	<bean id="Stock_Ds" scope="singleton" lazy-init="true"
+		class="net.nan21.dnet.core.presenter.service.ds.DefaultEntityDsService">
+		<property name="modelClass" value="net.nan21.dnet.module.tx.presenter.impl.inventory.model.Stock_Ds"/>
+		<property name="entityClass" value="net.nan21.dnet.module.tx.domain.impl.inventory.Stock"/>
+		<property name="readOnly" value="true" />
+	</bean>
+	
+	<!-- ==================== StockComponent ==================== -->
+		
+	<bean id="StockComponent_Ds" scope="singleton" lazy-init="true"
+		class="net.nan21.dnet.core.presenter.service.ds.DefaultEntityDsService">
+		<property name="modelClass" value="net.nan21.dnet.module.tx.presenter.impl.inventory.model.StockComponent_Ds"/>
+		<property name="entityClass" value="net.nan21.dnet.module.tx.domain.impl.inventory.StockComponent"/>
+		<property name="readOnly" value="true" />
+	</bean>
+</beans>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+			http://www.springframework.org/schema/beans
+				http://www.springframework.org/schema/beans/spring-beans.xsd
+			http://www.springframework.org/schema/context 
+				http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<bean id="InventoryTransaction" scope="singleton" lazy-init="true"
+		class="net.nan21.dnet.module.tx.business.ext.inventory.service.InventoryTransaction_Service"/>				
+
+	<bean id="InventoryTransactionLine" scope="singleton" lazy-init="true"
+		class="net.nan21.dnet.module.tx.business.impl.inventory.InventoryTransactionLine_Service"/>				
+
+	<bean id="InventoryOperation" scope="singleton" lazy-init="true"
+		class="net.nan21.dnet.module.tx.business.impl.inventory.InventoryOperation_Service"/>				
+
+	<bean id="Stock" scope="singleton" lazy-init="true"
+		class="net.nan21.dnet.module.tx.business.impl.inventory.Stock_Service"/>				
+
+	<bean id="StockComponent" scope="singleton" lazy-init="true"
+		class="net.nan21.dnet.module.tx.business.impl.inventory.StockComponent_Service"/>				
+
+	<bean id="StockHistory" scope="singleton" lazy-init="true"
+		class="net.nan21.dnet.module.tx.business.impl.inventory.StockHistory_Service"/>				
+
+	<bean id="StockHistoryComponent" scope="singleton" lazy-init="true"
+		class="net.nan21.dnet.module.tx.business.impl.inventory.StockHistoryComponent_Service"/>				
+</beans>

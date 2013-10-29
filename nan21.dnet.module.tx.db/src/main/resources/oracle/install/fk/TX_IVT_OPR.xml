@@ -1,0 +1,41 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+
+<changeSet author="amathe" id="FK-1">
+	<addForeignKeyConstraint constraintName="FK_TX_IVT_OPR1" 
+		baseTableName="TX_IVT_OPR"
+		baseColumnNames="INVENTORY_ID"
+		referencedTableName="MD_IVT" 
+		referencedColumnNames="ID"/>
+</changeSet>
+<changeSet author="amathe" id="FK-2">
+	<addForeignKeyConstraint constraintName="FK_TX_IVT_OPR2" 
+		baseTableName="TX_IVT_OPR"
+		baseColumnNames="LOCATION_ID"
+		referencedTableName="MD_IVTLOC" 
+		referencedColumnNames="ID"/>
+</changeSet>
+<changeSet author="amathe" id="FK-3">
+	<addForeignKeyConstraint constraintName="FK_TX_IVT_OPR3" 
+		baseTableName="TX_IVT_OPR"
+		baseColumnNames="PRODUCT_ID"
+		referencedTableName="MD_PROD" 
+		referencedColumnNames="ID"/>
+</changeSet>
+<changeSet author="amathe" id="FK-4">
+	<addForeignKeyConstraint constraintName="FK_TX_IVT_OPR4" 
+		baseTableName="TX_IVT_OPR"
+		baseColumnNames="UOM_ID"
+		referencedTableName="BD_UOM" 
+		referencedColumnNames="ID"/>
+</changeSet>
+<changeSet author="amathe" id="FK-5">
+	<addForeignKeyConstraint constraintName="FK_TX_IVT_OPR5" 
+		baseTableName="TX_IVT_OPR"
+		baseColumnNames="TRANSACTIONLINE_ID"
+		referencedTableName="TX_IVT_TX_LINE" 
+		referencedColumnNames="ID"/>
+</changeSet>
+</databaseChangeLog>

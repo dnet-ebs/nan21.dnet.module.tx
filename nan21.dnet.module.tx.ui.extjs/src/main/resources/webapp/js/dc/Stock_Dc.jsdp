@@ -1,0 +1,7 @@
+[
+	"nan21.dnet.module.tx.ui.extjs/ds/Stock_Ds", 
+	"nan21.dnet.module.md.ui.extjs/lov/Products_Lov", 
+	"nan21.dnet.module.md.ui.extjs/lov/Orgs_Lov", 
+	"nan21.dnet.module.md.ui.extjs/lov/Inventories_Lov", 
+	"nan21.dnet.module.md.ui.extjs/lov/InventoryLocations_Lov"
+]

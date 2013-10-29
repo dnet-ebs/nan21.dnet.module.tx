@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+
+	<changeSet author="amathe" id="TBL">
+		<createTable tableName="TX_PAY_AMNT">
+			<column name="ACTIVE" type="int(1)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="AMOUNT" type="decimal(21,6)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="AMOUNTLOC" type="decimal(21,6)"/>
+			<column name="AMOUNTREF" type="decimal(21,6)"/>
+			<column name="CLIENTID" type="varchar(64)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="CREATEDAT" type="datetime">
+				<constraints nullable="false"/>
+			</column>
+			<column name="CREATEDBY" type="varchar(32)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="ID" type="varchar(64)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="MODIFIEDAT" type="datetime">
+				<constraints nullable="false"/>
+			</column>
+			<column name="MODIFIEDBY" type="varchar(32)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="NOTES" type="text"/>
+			<column name="REFID" type="varchar(64)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="VERSION" type="bigint(10)"/>
+			<column name="AMOUNTOWED_ID" type="varchar(64)"/>
+			<column name="PAYMENT_ID" type="varchar(64)">
+				<constraints nullable="false"/>
+			</column>
+		</createTable>
+	</changeSet>
+
+	<changeSet author="amathe" id="PK">
+		<addPrimaryKey 
+			constraintName="PK_TX_PAY_AMNT"
+			tableName="TX_PAY_AMNT"
+			columnNames="ID"/>
+	</changeSet>
+
+</databaseChangeLog>

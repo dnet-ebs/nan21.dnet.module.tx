@@ -1,0 +1,27 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+
+<changeSet author="amathe" id="FK-1">
+	<addForeignKeyConstraint constraintName="FK_TX_PAY_LINE1" 
+		baseTableName="TX_PAY_LINE"
+		baseColumnNames="PAYMENT_ID"
+		referencedTableName="TX_PAY" 
+		referencedColumnNames="ID" onDelete="CASCADE"/>
+</changeSet>
+<changeSet author="amathe" id="FK-2">
+	<addForeignKeyConstraint constraintName="FK_TX_PAY_LINE2" 
+		baseTableName="TX_PAY_LINE"
+		baseColumnNames="PRODUCTACCOUNT_ID"
+		referencedTableName="MD_PROD_ACNT" 
+		referencedColumnNames="ID"/>
+</changeSet>
+<changeSet author="amathe" id="FK-4">
+	<addForeignKeyConstraint constraintName="FK_TX_PAY_LINE4" 
+		baseTableName="TX_PAY_LINE"
+		baseColumnNames="UOM_ID"
+		referencedTableName="BD_UOM" 
+		referencedColumnNames="ID"/>
+</changeSet>
+</databaseChangeLog>

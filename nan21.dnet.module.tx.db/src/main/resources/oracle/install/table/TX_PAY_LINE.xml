@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+
+	<changeSet author="amathe" id="TBL">
+		<createTable tableName="TX_PAY_LINE">
+			<column name="ACTIVE" type="number(1)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="AMOUNT" type="number(21,6)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="CLIENTID" type="varchar2(64)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="CREATEDAT" type="DATE">
+				<constraints nullable="false"/>
+			</column>
+			<column name="CREATEDBY" type="varchar2(32)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="ID" type="varchar2(64)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="MODIFIEDAT" type="DATE">
+				<constraints nullable="false"/>
+			</column>
+			<column name="MODIFIEDBY" type="varchar2(32)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="NOTES" type="varchar2(4000)"/>
+			<column name="QUANTITY" type="number(21,6)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="REFID" type="varchar2(64)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="UNITPRICE" type="number(21,6)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="VERSION" type="number(10)"/>
+			<column name="PAYMENT_ID" type="varchar2(64)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="PRODUCTACCOUNT_ID" type="varchar2(64)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="UOM_ID" type="varchar2(64)">
+				<constraints nullable="false"/>
+			</column>
+		</createTable>
+	</changeSet>
+
+	<changeSet author="amathe" id="PK">
+		<addPrimaryKey 
+			constraintName="PK_TX_PAY_LINE"
+			tableName="TX_PAY_LINE"
+			columnNames="ID"/>
+	</changeSet>
+
+</databaseChangeLog>

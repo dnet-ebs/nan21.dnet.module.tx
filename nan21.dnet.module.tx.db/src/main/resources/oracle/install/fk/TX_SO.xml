@@ -1,0 +1,83 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+
+<changeSet author="amathe" id="FK-1">
+	<addForeignKeyConstraint constraintName="FK_TX_SO1" 
+		baseTableName="TX_SO"
+		baseColumnNames="DOCTYPE_ID"
+		referencedTableName="MD_DOC_TYPE" 
+		referencedColumnNames="ID"/>
+</changeSet>
+<changeSet author="amathe" id="FK-2">
+	<addForeignKeyConstraint constraintName="FK_TX_SO2" 
+		baseTableName="TX_SO"
+		baseColumnNames="COMPANY_ID"
+		referencedTableName="MD_ORG" 
+		referencedColumnNames="ID"/>
+</changeSet>
+<changeSet author="amathe" id="FK-3">
+	<addForeignKeyConstraint constraintName="FK_TX_SO3" 
+		baseTableName="TX_SO"
+		baseColumnNames="BPACCOUNT_ID"
+		referencedTableName="MD_BP_ACNT" 
+		referencedColumnNames="ID"/>
+</changeSet>
+<changeSet author="amathe" id="FK-4">
+	<addForeignKeyConstraint constraintName="FK_TX_SO4" 
+		baseTableName="TX_SO"
+		baseColumnNames="CURRENCY_ID"
+		referencedTableName="BD_CRNCY" 
+		referencedColumnNames="ID"/>
+</changeSet>
+<changeSet author="amathe" id="FK-5">
+	<addForeignKeyConstraint constraintName="FK_TX_SO5" 
+		baseTableName="TX_SO"
+		baseColumnNames="ORG_ID"
+		referencedTableName="MD_ORG" 
+		referencedColumnNames="ID"/>
+</changeSet>
+<changeSet author="amathe" id="FK-10">
+	<addForeignKeyConstraint constraintName="FK_TX_SO10" 
+		baseTableName="TX_SO"
+		baseColumnNames="BILLTOLOCATION_ID"
+		referencedTableName="BD_GEO_LOCATION" 
+		referencedColumnNames="ID"/>
+</changeSet>
+<changeSet author="amathe" id="FK-11">
+	<addForeignKeyConstraint constraintName="FK_TX_SO11" 
+		baseTableName="TX_SO"
+		baseColumnNames="BILLTOCONTACT_ID"
+		referencedTableName="MD_BP_CNTC" 
+		referencedColumnNames="ID"/>
+</changeSet>
+<changeSet author="amathe" id="FK-20">
+	<addForeignKeyConstraint constraintName="FK_TX_SO20" 
+		baseTableName="TX_SO"
+		baseColumnNames="SHIPTOLOCATION_ID"
+		referencedTableName="BD_GEO_LOCATION" 
+		referencedColumnNames="ID"/>
+</changeSet>
+<changeSet author="amathe" id="FK-21">
+	<addForeignKeyConstraint constraintName="FK_TX_SO21" 
+		baseTableName="TX_SO"
+		baseColumnNames="SHIPTOCONTACT_ID"
+		referencedTableName="MD_BP_CNTC" 
+		referencedColumnNames="ID"/>
+</changeSet>
+<changeSet author="amathe" id="FK-30">
+	<addForeignKeyConstraint constraintName="FK_TX_SO30" 
+		baseTableName="TX_SO"
+		baseColumnNames="PAYMENTMETHOD_ID"
+		referencedTableName="MD_DOC_TYPE" 
+		referencedColumnNames="ID"/>
+</changeSet>
+<changeSet author="amathe" id="FK-31">
+	<addForeignKeyConstraint constraintName="FK_TX_SO31" 
+		baseTableName="TX_SO"
+		baseColumnNames="PAYMENTTERM_ID"
+		referencedTableName="MD_PAY_TERM" 
+		referencedColumnNames="ID"/>
+</changeSet>
+</databaseChangeLog>

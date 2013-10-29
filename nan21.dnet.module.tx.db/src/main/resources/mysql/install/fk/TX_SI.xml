@@ -1,0 +1,69 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+
+<changeSet author="amathe" id="FK-1">
+	<addForeignKeyConstraint constraintName="FK_TX_SI1" 
+		baseTableName="TX_SI"
+		baseColumnNames="DOCTYPE_ID"
+		referencedTableName="MD_DOC_TYPE" 
+		referencedColumnNames="ID"/>
+</changeSet>
+<changeSet author="amathe" id="FK-2">
+	<addForeignKeyConstraint constraintName="FK_TX_SI2" 
+		baseTableName="TX_SI"
+		baseColumnNames="COMPANY_ID"
+		referencedTableName="MD_ORG" 
+		referencedColumnNames="ID"/>
+</changeSet>
+<changeSet author="amathe" id="FK-3">
+	<addForeignKeyConstraint constraintName="FK_TX_SI3" 
+		baseTableName="TX_SI"
+		baseColumnNames="BPACCOUNT_ID"
+		referencedTableName="MD_BP_ACNT" 
+		referencedColumnNames="ID"/>
+</changeSet>
+<changeSet author="amathe" id="FK-4">
+	<addForeignKeyConstraint constraintName="FK_TX_SI4" 
+		baseTableName="TX_SI"
+		baseColumnNames="CURRENCY_ID"
+		referencedTableName="BD_CRNCY" 
+		referencedColumnNames="ID"/>
+</changeSet>
+<changeSet author="amathe" id="FK-5">
+	<addForeignKeyConstraint constraintName="FK_TX_SI5" 
+		baseTableName="TX_SI"
+		baseColumnNames="ORG_ID"
+		referencedTableName="MD_ORG" 
+		referencedColumnNames="ID"/>
+</changeSet>
+<changeSet author="amathe" id="FK-10">
+	<addForeignKeyConstraint constraintName="FK_TX_SI10" 
+		baseTableName="TX_SI"
+		baseColumnNames="BILLTOLOCATION_ID"
+		referencedTableName="BD_GEO_LOCATION" 
+		referencedColumnNames="ID"/>
+</changeSet>
+<changeSet author="amathe" id="FK-11">
+	<addForeignKeyConstraint constraintName="FK_TX_SI11" 
+		baseTableName="TX_SI"
+		baseColumnNames="BILLTOCONTACT_ID"
+		referencedTableName="MD_BP_CNTC" 
+		referencedColumnNames="ID"/>
+</changeSet>
+<changeSet author="amathe" id="FK-30">
+	<addForeignKeyConstraint constraintName="FK_TX_SI30" 
+		baseTableName="TX_SI"
+		baseColumnNames="PAYMENTMETHOD_ID"
+		referencedTableName="MD_DOC_TYPE" 
+		referencedColumnNames="ID"/>
+</changeSet>
+<changeSet author="amathe" id="FK-31">
+	<addForeignKeyConstraint constraintName="FK_TX_SI31" 
+		baseTableName="TX_SI"
+		baseColumnNames="PAYMENTTERM_ID"
+		referencedTableName="MD_PAY_TERM" 
+		referencedColumnNames="ID"/>
+</changeSet>
+</databaseChangeLog>

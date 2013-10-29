@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:int="http://www.springframework.org/schema/integration"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:osgi-compendium="http://www.springframework.org/schema/osgi-compendium"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/integration
+		http://www.springframework.org/schema/integration/spring-integration.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/osgi-compendium
+		http://www.springframework.org/schema/osgi-compendium/spring-osgi-compendium.xsd
+		http://www.springframework.org/schema/aop
+		http://www.springframework.org/schema/aop/spring-aop.xsd
+		http://www.springframework.org/schema/tx
+		http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+	<!-- Properties -->
+	<context:property-placeholder properties-ref="dnet-properties" />
+	<osgi-compendium:cm-properties id="dnet-properties"
+		persistent-id="net.nan21.dnet" />
+
+	<context:annotation-config />
+
+	<!-- Transaction manager configuration. -->
+
+	<tx:annotation-driven mode="aspectj"/>
+
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="insert" read-only="false" rollback-for="BusinessException" />
+			<tx:method name="update" read-only="false" rollback-for="BusinessException" />
+			<tx:method name="delete*" read-only="false" rollback-for="BusinessException" />
+			<tx:method name="do*" read-only="false" rollback-for="BusinessException" />
+		</tx:attributes>
+	</tx:advice>
+
+	<aop:config>
+		<aop:pointcut id="services" expression="execution(* *..*Service.*(..))" />		
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="services" />
+	</aop:config>
+
+	<bean id="serviceLocator"
+		class="net.nan21.dnet.core.business.service.ServiceLocatorBusiness" />
+
+	<bean id="entityServiceFactory"
+		class="net.nan21.dnet.core.business.service.entity.EntityServiceFactory" />
+
+	<bean id="defaultAsgnTxService" 
+	  	class="net.nan21.dnet.core.business.service.asgn.DefaultAsgnTxService"/>
+
+	<bean id="jobFactory" 
+			class="net.nan21.dnet.core.business.service.job.BusinessJobFactory">
+	</bean>
+
+	<bean id="asgnTxServiceFactory" class="net.nan21.dnet.core.business.service.asgn.AsgnTxServiceFactory">
+		<property name="name" value="nan21.dnet.module.tx.business"/>
+	</bean>
+
+	<!-- Services -->
+
+	<import resource="beans/financial.xml"/>
+	<import resource="beans/inventory.xml"/>
+	<import resource="beans/purchase-invoice.xml"/>
+	<import resource="beans/purchase-order.xml"/>
+	<import resource="beans/sale-invoice.xml"/>
+	<import resource="beans/sale-order.xml"/>
+
+	<!-- Messaging -->
+
+	<int:channel id="SalesInvoice-calculateAmounts"/>
+	<int:service-activator 
+		input-channel="SalesInvoice-calculateAmounts" 
+		output-channel="SalesInvoice-calculateAmounts"
+		ref="SalesInvoice" method="calculateAmounts"/>
+	
+	<int:channel id="SalesOrder-calculateAmounts"/>
+	<int:service-activator 
+		input-channel="SalesOrder-calculateAmounts" 
+		output-channel="SalesOrder-calculateAmounts"
+		ref="SalesOrder" method="calculateAmounts"/>
+ 
+	<int:channel id="PurchaseInvoice-calculateAmounts"/>
+	<int:service-activator 
+		input-channel="PurchaseInvoice-calculateAmounts" 
+		output-channel="PurchaseInvoice-calculateAmounts"
+		ref="PurchaseInvoice" method="calculateAmounts"/>
+
+	<int:channel id="PurchaseOrder-calculateAmounts"/>
+	<int:service-activator 
+		input-channel="PurchaseOrder-calculateAmounts" 
+		output-channel="PurchaseOrder-calculateAmounts"
+		ref="PurchaseOrder" method="calculateAmounts"/>
+ 
+</beans>

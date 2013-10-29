@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+
+	<changeSet author="amathe" id="TBL">
+		<createTable tableName="TX_AMNT_OWED">
+			<column name="ACTIVE" type="int(1)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="AMOUNT" type="decimal(21,6)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="AMOUNTPAYED" type="decimal(21,6)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="AMOUNTREMAINED" type="decimal(21,6)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="CLIENTID" type="varchar(64)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="CREATEDAT" type="datetime">
+				<constraints nullable="false"/>
+			</column>
+			<column name="CREATEDBY" type="varchar(32)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="DUEDATE" type="date">
+				<constraints nullable="false"/>
+			</column>
+			<column name="ID" type="varchar(64)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="MODIFIEDAT" type="datetime">
+				<constraints nullable="false"/>
+			</column>
+			<column name="MODIFIEDBY" type="varchar(32)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="NOTES" type="text"/>
+			<column name="REFID" type="varchar(64)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="VERSION" type="bigint(10)"/>
+			<column name="BPACCOUNT_ID" type="varchar(64)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="CURRENCY_ID" type="varchar(64)"/>
+			<column name="PURCHASEINVOICE_ID" type="varchar(64)"/>
+			<column name="PURCHASEORDER_ID" type="varchar(64)"/>
+			<column name="SALESINVOICE_ID" type="varchar(64)"/>
+			<column name="SALESORDER_ID" type="varchar(64)"/>
+		</createTable>
+	</changeSet>
+
+	<changeSet author="amathe" id="PK">
+		<addPrimaryKey 
+			constraintName="PK_TX_AMNT_OWED"
+			tableName="TX_AMNT_OWED"
+			columnNames="ID"/>
+	</changeSet>
+
+</databaseChangeLog>

@@ -1,0 +1,62 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+
+<changeSet author="amathe" id="FK-1">
+	<addForeignKeyConstraint constraintName="FK_TX_IVT_TX_LINE1" 
+		baseTableName="TX_IVT_TX_LINE"
+		baseColumnNames="INVENTORYTRANSACTION_ID"
+		referencedTableName="TX_IVT_TX" 
+		referencedColumnNames="ID"/>
+</changeSet>
+<changeSet author="amathe" id="FK-2">
+	<addForeignKeyConstraint constraintName="FK_TX_IVT_TX_LINE2" 
+		baseTableName="TX_IVT_TX_LINE"
+		baseColumnNames="PRODUCT_ID"
+		referencedTableName="MD_PROD" 
+		referencedColumnNames="ID"/>
+</changeSet>
+<changeSet author="amathe" id="FK-3">
+	<addForeignKeyConstraint constraintName="FK_TX_IVT_TX_LINE3" 
+		baseTableName="TX_IVT_TX_LINE"
+		baseColumnNames="FROMINVENTORY_ID"
+		referencedTableName="MD_IVT" 
+		referencedColumnNames="ID"/>
+</changeSet>
+<changeSet author="amathe" id="FK-4">
+	<addForeignKeyConstraint constraintName="FK_TX_IVT_TX_LINE4" 
+		baseTableName="TX_IVT_TX_LINE"
+		baseColumnNames="FROMLOCATION_ID"
+		referencedTableName="MD_IVTLOC" 
+		referencedColumnNames="ID"/>
+</changeSet>
+<changeSet author="amathe" id="FK-5">
+	<addForeignKeyConstraint constraintName="FK_TX_IVT_TX_LINE5" 
+		baseTableName="TX_IVT_TX_LINE"
+		baseColumnNames="TOINVENTORY_ID"
+		referencedTableName="MD_IVT" 
+		referencedColumnNames="ID"/>
+</changeSet>
+<changeSet author="amathe" id="FK-6">
+	<addForeignKeyConstraint constraintName="FK_TX_IVT_TX_LINE6" 
+		baseTableName="TX_IVT_TX_LINE"
+		baseColumnNames="TOLOCATION_ID"
+		referencedTableName="MD_IVTLOC" 
+		referencedColumnNames="ID"/>
+</changeSet>
+<changeSet author="amathe" id="FK-7">
+	<addForeignKeyConstraint constraintName="FK_TX_IVT_TX_LINE7" 
+		baseTableName="TX_IVT_TX_LINE"
+		baseColumnNames="UOM_ID"
+		referencedTableName="BD_UOM" 
+		referencedColumnNames="ID"/>
+</changeSet>
+<changeSet author="amathe" id="FK-8">
+	<addForeignKeyConstraint constraintName="FK_TX_IVT_TX_LINE8" 
+		baseTableName="TX_IVT_TX_LINE"
+		baseColumnNames="CURRENCY_ID"
+		referencedTableName="BD_CRNCY" 
+		referencedColumnNames="ID"/>
+</changeSet>
+</databaseChangeLog>

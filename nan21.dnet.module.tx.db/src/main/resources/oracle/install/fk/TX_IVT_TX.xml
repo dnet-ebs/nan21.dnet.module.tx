@@ -1,0 +1,76 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+
+<changeSet author="amathe" id="FK-1">
+	<addForeignKeyConstraint constraintName="FK_TX_IVT_TX1" 
+		baseTableName="TX_IVT_TX"
+		baseColumnNames="DOCTYPE_ID"
+		referencedTableName="MD_DOC_TYPE" 
+		referencedColumnNames="ID"/>
+</changeSet>
+<changeSet author="amathe" id="FK-2">
+	<addForeignKeyConstraint constraintName="FK_TX_IVT_TX2" 
+		baseTableName="TX_IVT_TX"
+		baseColumnNames="FROMINVENTORY_ID"
+		referencedTableName="MD_ORG" 
+		referencedColumnNames="ID"/>
+</changeSet>
+<changeSet author="amathe" id="FK-3">
+	<addForeignKeyConstraint constraintName="FK_TX_IVT_TX3" 
+		baseTableName="TX_IVT_TX"
+		baseColumnNames="TOINVENTORY_ID"
+		referencedTableName="MD_ORG" 
+		referencedColumnNames="ID"/>
+</changeSet>
+<changeSet author="amathe" id="FK-10">
+	<addForeignKeyConstraint constraintName="FK_TX_IVT_TX10" 
+		baseTableName="TX_IVT_TX"
+		baseColumnNames="SALESORDER_ID"
+		referencedTableName="TX_SO" 
+		referencedColumnNames="ID"/>
+</changeSet>
+<changeSet author="amathe" id="FK-11">
+	<addForeignKeyConstraint constraintName="FK_TX_IVT_TX11" 
+		baseTableName="TX_IVT_TX"
+		baseColumnNames="SALESINVOICE_ID"
+		referencedTableName="TX_SI" 
+		referencedColumnNames="ID"/>
+</changeSet>
+<changeSet author="amathe" id="FK-12">
+	<addForeignKeyConstraint constraintName="FK_TX_IVT_TX12" 
+		baseTableName="TX_IVT_TX"
+		baseColumnNames="PURCHASEORDER_ID"
+		referencedTableName="TX_PO" 
+		referencedColumnNames="ID"/>
+</changeSet>
+<changeSet author="amathe" id="FK-13">
+	<addForeignKeyConstraint constraintName="FK_TX_IVT_TX13" 
+		baseTableName="TX_IVT_TX"
+		baseColumnNames="PURCHASEINVOICE_ID"
+		referencedTableName="TX_PI" 
+		referencedColumnNames="ID"/>
+</changeSet>
+<changeSet author="amathe" id="FK-16">
+	<addForeignKeyConstraint constraintName="FK_TX_IVT_TX16" 
+		baseTableName="TX_IVT_TX"
+		baseColumnNames="BPACCOUNT_ID"
+		referencedTableName="MD_BP_ACNT" 
+		referencedColumnNames="ID"/>
+</changeSet>
+<changeSet author="amathe" id="FK-17">
+	<addForeignKeyConstraint constraintName="FK_TX_IVT_TX17" 
+		baseTableName="TX_IVT_TX"
+		baseColumnNames="DELIVERYLOCATION_ID"
+		referencedTableName="BD_GEO_LOCATION" 
+		referencedColumnNames="ID"/>
+</changeSet>
+<changeSet author="amathe" id="FK-18">
+	<addForeignKeyConstraint constraintName="FK_TX_IVT_TX18" 
+		baseTableName="TX_IVT_TX"
+		baseColumnNames="DELIVERYCONTACT_ID"
+		referencedTableName="MD_BP_CNTC" 
+		referencedColumnNames="ID"/>
+</changeSet>
+</databaseChangeLog>

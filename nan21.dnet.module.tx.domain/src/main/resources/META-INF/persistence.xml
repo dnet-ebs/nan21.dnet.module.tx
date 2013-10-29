@@ -1,0 +1,75 @@
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd"
+	version="1.0">
+	<persistence-unit name="default" transaction-type="RESOURCE_LOCAL">
+		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+		
+		<!-- Declared -->
+		<class>net.nan21.dnet.module.tx.domain.impl.financial.AmountBalance</class>
+		<class>net.nan21.dnet.module.tx.domain.impl.financial.AmountOwed</class>
+		<class>net.nan21.dnet.module.tx.domain.impl.financial.Payment</class>
+		<class>net.nan21.dnet.module.tx.domain.impl.financial.PaymentAmount</class>
+		<class>net.nan21.dnet.module.tx.domain.impl.financial.PaymentLine</class>
+		<class>net.nan21.dnet.module.tx.domain.impl.inventory.InventoryOperation</class>
+		<class>net.nan21.dnet.module.tx.domain.impl.inventory.InventoryTransaction</class>
+		<class>net.nan21.dnet.module.tx.domain.impl.inventory.InventoryTransactionLine</class>
+		<class>net.nan21.dnet.module.tx.domain.impl.inventory.Stock</class>
+		<class>net.nan21.dnet.module.tx.domain.impl.inventory.StockComponent</class>
+		<class>net.nan21.dnet.module.tx.domain.impl.inventory.StockHistory</class>
+		<class>net.nan21.dnet.module.tx.domain.impl.inventory.StockHistoryComponent</class>
+		<class>net.nan21.dnet.module.tx.domain.impl.purchase.PurchaseInvoice</class>
+		<class>net.nan21.dnet.module.tx.domain.impl.purchase.PurchaseInvoiceLine</class>
+		<class>net.nan21.dnet.module.tx.domain.impl.purchase.PurchaseInvoiceLineTax</class>
+		<class>net.nan21.dnet.module.tx.domain.impl.purchase.PurchaseInvoiceTax</class>
+		<class>net.nan21.dnet.module.tx.domain.impl.purchase.PurchaseOrder</class>
+		<class>net.nan21.dnet.module.tx.domain.impl.purchase.PurchaseOrderLine</class>
+		<class>net.nan21.dnet.module.tx.domain.impl.purchase.PurchaseOrderLineTax</class>
+		<class>net.nan21.dnet.module.tx.domain.impl.purchase.PurchaseOrderTax</class>
+		<class>net.nan21.dnet.module.tx.domain.impl.sale.SalesInvoice</class>
+		<class>net.nan21.dnet.module.tx.domain.impl.sale.SalesInvoiceLine</class>
+		<class>net.nan21.dnet.module.tx.domain.impl.sale.SalesInvoiceLineTax</class>
+		<class>net.nan21.dnet.module.tx.domain.impl.sale.SalesInvoiceTax</class>
+		<class>net.nan21.dnet.module.tx.domain.impl.sale.SalesOrder</class>
+		<class>net.nan21.dnet.module.tx.domain.impl.sale.SalesOrderLine</class>
+		<class>net.nan21.dnet.module.tx.domain.impl.sale.SalesOrderLineTax</class>
+		<class>net.nan21.dnet.module.tx.domain.impl.sale.SalesOrderTax</class>
+		
+		<!-- Dependencies -->
+		<class>net.nan21.dnet.module.bd.domain.impl.attr.AttributeSet</class>
+		<class>net.nan21.dnet.module.bd.domain.impl.currency.Currency</class>
+		<class>net.nan21.dnet.module.bd.domain.impl.geo.City</class>
+		<class>net.nan21.dnet.module.bd.domain.impl.geo.Country</class>
+		<class>net.nan21.dnet.module.bd.domain.impl.geo.Location</class>
+		<class>net.nan21.dnet.module.bd.domain.impl.geo.Region</class>
+		<class>net.nan21.dnet.module.bd.domain.impl.other.LookupItem</class>
+		<class>net.nan21.dnet.module.bd.domain.impl.uom.Uom</class>
+		<class>net.nan21.dnet.module.bd.domain.impl.uom.UomType</class>
+		<class>net.nan21.dnet.module.md.domain.impl.base.DocType</class>
+		<class>net.nan21.dnet.module.md.domain.impl.base.PaymentTerm</class>
+		<class>net.nan21.dnet.module.md.domain.impl.base.Tax</class>
+		<class>net.nan21.dnet.module.md.domain.impl.base.TaxCategory</class>
+		<class>net.nan21.dnet.module.md.domain.impl.bp.BpAccount</class>
+		<class>net.nan21.dnet.module.md.domain.impl.bp.BpContact</class>
+		<class>net.nan21.dnet.module.md.domain.impl.bp.BpContactPosition</class>
+		<class>net.nan21.dnet.module.md.domain.impl.bp.BusinessPartner</class>
+		<class>net.nan21.dnet.module.md.domain.impl.bp.CustomerGroup</class>
+		<class>net.nan21.dnet.module.md.domain.impl.bp.LegalForm</class>
+		<class>net.nan21.dnet.module.md.domain.impl.bp.VendorGroup</class>
+		<class>net.nan21.dnet.module.md.domain.impl.mm.Product</class>
+		<class>net.nan21.dnet.module.md.domain.impl.mm.ProductAccount</class>
+		<class>net.nan21.dnet.module.md.domain.impl.mm.ProductAccountType</class>
+		<class>net.nan21.dnet.module.md.domain.impl.mm.ProductCategory</class>
+		<class>net.nan21.dnet.module.md.domain.impl.mm.ProductManufacturer</class>
+		<class>net.nan21.dnet.module.md.domain.impl.org.Inventory</class>
+		<class>net.nan21.dnet.module.md.domain.impl.org.InventoryLocation</class>
+		<class>net.nan21.dnet.module.md.domain.impl.org.InventoryLocationType</class>
+		<class>net.nan21.dnet.module.md.domain.impl.org.Org</class>
+		<class>net.nan21.dnet.module.md.domain.impl.org.OrgType</class>
+		
+		<exclude-unlisted-classes>true</exclude-unlisted-classes> 
+		<properties>
+			<property name="eclipselink.weaving" value="static" />
+		</properties>
+	</persistence-unit>
+</persistence>

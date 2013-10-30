@@ -26,5 +26,7 @@
 		<module>nan21.dnet.module.tx.domain</module>
 		<module>nan21.dnet.module.tx.business.api</module>
 		<module>nan21.dnet.module.tx.business</module>
+		<module>nan21.dnet.module.tx.presenter</module>
+		<module>nan21.dnet.module.tx.ui.extjs</module>
 	</modules>
 </project>

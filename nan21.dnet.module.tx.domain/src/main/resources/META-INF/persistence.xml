@@ -37,12 +37,12 @@
 		
 		<!-- Dependencies -->
 		<class>net.nan21.dnet.module.bd.domain.impl.attr.AttributeSet</class>
+		<class>net.nan21.dnet.module.bd.domain.impl.attr.LookupItem</class>
 		<class>net.nan21.dnet.module.bd.domain.impl.currency.Currency</class>
 		<class>net.nan21.dnet.module.bd.domain.impl.geo.City</class>
 		<class>net.nan21.dnet.module.bd.domain.impl.geo.Country</class>
 		<class>net.nan21.dnet.module.bd.domain.impl.geo.Location</class>
 		<class>net.nan21.dnet.module.bd.domain.impl.geo.Region</class>
-		<class>net.nan21.dnet.module.bd.domain.impl.other.LookupItem</class>
 		<class>net.nan21.dnet.module.bd.domain.impl.uom.Uom</class>
 		<class>net.nan21.dnet.module.bd.domain.impl.uom.UomType</class>
 		<class>net.nan21.dnet.module.md.domain.impl.base.DocType</class>

@@ -28,8 +28,13 @@ public class PurchaseInvoice_Bd extends AbstractBusinessDelegate {
 				.setParameter("invoiceId", invoiceId).getSingleResult();
 		PurchaseInvoice doc = this.getEntityManager().find(
 				PurchaseInvoice.class, invoiceId);
-		BigDecimal netAmount = new BigDecimal(x[0] + "");
-		BigDecimal taxAmount = new BigDecimal(x[1] + "");
+		BigDecimal netAmount = new BigDecimal("0");
+		BigDecimal taxAmount = new BigDecimal("0");
+
+		if (x[0] != null && x[1] != null) {
+			netAmount = new BigDecimal(x[0] + "");
+			taxAmount = new BigDecimal(x[1] + "");
+		}
 
 		doc.setNetAmount(netAmount);
 		doc.setTaxAmount(taxAmount);

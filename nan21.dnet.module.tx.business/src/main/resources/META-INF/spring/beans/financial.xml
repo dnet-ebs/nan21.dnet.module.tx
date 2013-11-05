@@ -8,7 +8,7 @@
 				http://www.springframework.org/schema/context/spring-context.xsd">
 
 	<bean id="Payment" scope="singleton" lazy-init="true"
-		class="net.nan21.dnet.module.tx.business.impl.financial.Payment_Service"/>				
+		class="net.nan21.dnet.module.tx.business.ext.financial.service.Payment_Service"/>				
 
 	<bean id="PaymentLine" scope="singleton" lazy-init="true"
 		class="net.nan21.dnet.module.tx.business.ext.financial.service.PaymentLine_Service"/>				

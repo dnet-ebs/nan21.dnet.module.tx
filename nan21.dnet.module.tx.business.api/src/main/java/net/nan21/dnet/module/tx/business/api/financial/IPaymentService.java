@@ -6,6 +6,7 @@
 package net.nan21.dnet.module.tx.business.api.financial;
 
 import java.util.List;
+import net.nan21.dnet.core.api.exceptions.BusinessException;
 import net.nan21.dnet.core.api.service.business.IEntityService;
 import net.nan21.dnet.module.bd.domain.impl.currency.Currency;
 import net.nan21.dnet.module.md.domain.impl.base.DocType;
@@ -19,6 +20,14 @@ import net.nan21.dnet.module.tx.domain.impl.financial.PaymentLine;
  * entity.
  */
 public interface IPaymentService extends IEntityService<Payment> {
+
+	public void doConfirm(Payment payment) throws BusinessException;
+
+	public void doUnConfirm(Payment payment) throws BusinessException;
+
+	public void doPost(Payment payment) throws BusinessException;
+
+	public void doUnPost(Payment payment) throws BusinessException;
 
 	/**
 	 * Find by unique key

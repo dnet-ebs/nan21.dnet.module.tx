@@ -13,7 +13,6 @@ import net.nan21.dnet.module.bd.domain.impl.currency.Currency;
 import net.nan21.dnet.module.md.domain.impl.base.DocType;
 import net.nan21.dnet.module.md.domain.impl.bp.BpAccount;
 import net.nan21.dnet.module.md.domain.impl.org.Org;
-import net.nan21.dnet.module.tx.business.api.financial.IPaymentService;
 import net.nan21.dnet.module.tx.domain.impl.financial.Payment;
 import net.nan21.dnet.module.tx.domain.impl.financial.PaymentLine;
 
@@ -22,9 +21,7 @@ import net.nan21.dnet.module.tx.domain.impl.financial.PaymentLine;
  * finder methods based on unique keys as well as reference fields.
  * 
  */
-public class Payment_Service extends AbstractEntityService<Payment>
-		implements
-			IPaymentService {
+public class Payment_Service extends AbstractEntityService<Payment> {
 
 	public Payment_Service() {
 		super();

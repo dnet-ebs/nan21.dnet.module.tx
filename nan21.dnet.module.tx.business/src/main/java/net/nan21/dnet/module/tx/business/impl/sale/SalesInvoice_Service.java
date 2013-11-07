@@ -19,6 +19,7 @@ import net.nan21.dnet.module.md.domain.impl.org.Org;
 import net.nan21.dnet.module.tx.domain.impl.sale.SalesInvoice;
 import net.nan21.dnet.module.tx.domain.impl.sale.SalesInvoiceLine;
 import net.nan21.dnet.module.tx.domain.impl.sale.SalesInvoiceTax;
+import net.nan21.dnet.module.tx.domain.impl.sale.SalesOrder;
 
 /**
  * Repository functionality for {@link SalesInvoice} domain entity. It contains
@@ -224,6 +225,25 @@ public class SalesInvoice_Service extends AbstractEntityService<SalesInvoice> {
 				.setParameter("clientId",
 						Session.user.get().getClient().getId())
 				.setParameter("paymentTermId", paymentTermId).getResultList();
+	}
+	/**
+	 * Find by reference: salesOrder
+	 */
+	public List<SalesInvoice> findBySalesOrder(SalesOrder salesOrder) {
+		return this.findBySalesOrderId(salesOrder.getId());
+	}
+	/**
+	 * Find by ID of reference: salesOrder.id
+	 */
+	public List<SalesInvoice> findBySalesOrderId(String salesOrderId) {
+		return (List<SalesInvoice>) this
+				.getEntityManager()
+				.createQuery(
+						"select e from SalesInvoice e where e.clientId = :clientId and e.salesOrder.id = :salesOrderId",
+						SalesInvoice.class)
+				.setParameter("clientId",
+						Session.user.get().getClient().getId())
+				.setParameter("salesOrderId", salesOrderId).getResultList();
 	}
 	/**
 	 * Find by reference: lines

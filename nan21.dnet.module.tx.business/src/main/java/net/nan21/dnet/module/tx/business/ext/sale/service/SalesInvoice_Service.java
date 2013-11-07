@@ -5,6 +5,8 @@
  */
 package net.nan21.dnet.module.tx.business.ext.sale.service;
 
+import org.springframework.util.Assert;
+
 import net.nan21.dnet.core.api.exceptions.BusinessException;
 import net.nan21.dnet.module.md.business.api.org.IDocSequenceValueService;
 import net.nan21.dnet.module.md.domain.impl.org.DocSequenceValue;
@@ -23,14 +25,14 @@ public class SalesInvoice_Service extends
 
 	@Override
 	public void doConfirm(SalesInvoice invoice) throws BusinessException {
-		// TODO Auto-generated method stub
-
+		invoice.setConfirmed(true);
+		this.getEntityManager().merge(invoice);
 	}
 
 	@Override
 	public void doUnConfirm(SalesInvoice invoice) throws BusinessException {
-		// TODO Auto-generated method stub
-
+		invoice.setConfirmed(false);
+		this.getEntityManager().merge(invoice);
 	}
 
 	@Override
@@ -67,6 +69,11 @@ public class SalesInvoice_Service extends
 	@Override
 	protected void preInsert(SalesInvoice e) throws BusinessException {
 		if (e.getDocNo() == null) {
+			Assert.notNull(e.getCompany(),
+					"An invoice must belong to a company!");
+			Assert.notNull(e.getDocType(),
+					"Specify a document type for invoice!");
+
 			IDocSequenceValueService srv = (IDocSequenceValueService) this
 					.findEntityService(DocSequenceValue.class);
 			DocSequenceValue seqVal = srv.getNextValue(e.getCompany().getId(),

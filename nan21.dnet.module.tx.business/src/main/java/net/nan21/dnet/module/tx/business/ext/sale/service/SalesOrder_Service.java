@@ -12,7 +12,6 @@ import net.nan21.dnet.core.api.exceptions.BusinessException;
 import net.nan21.dnet.core.api.session.Session;
 import net.nan21.dnet.module.bd.domain.impl.geo.Location;
 import net.nan21.dnet.module.md.business.api.org.IDocSequenceValueService;
-import net.nan21.dnet.module.md.domain.impl.base.DocType;
 import net.nan21.dnet.module.md.domain.impl.bp.BpAccount;
 import net.nan21.dnet.module.md.domain.impl.bp.CustomerGroup;
 import net.nan21.dnet.module.md.domain.impl.org.DocSequenceValue;
@@ -32,14 +31,14 @@ public class SalesOrder_Service extends
 
 	@Override
 	public void doConfirm(SalesOrder order) throws BusinessException {
-		// TODO Auto-generated method stub
-
+		order.setConfirmed(true);
+		this.getEntityManager().merge(order);
 	}
 
 	@Override
 	public void doUnConfirm(SalesOrder order) throws BusinessException {
-		// TODO Auto-generated method stub
-
+		order.setConfirmed(false);
+		this.getEntityManager().merge(order);
 	}
 
 	@Override

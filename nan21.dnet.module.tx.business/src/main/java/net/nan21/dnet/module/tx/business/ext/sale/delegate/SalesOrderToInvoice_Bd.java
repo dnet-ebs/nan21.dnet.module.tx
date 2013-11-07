@@ -22,30 +22,31 @@ public class SalesOrderToInvoice_Bd extends AbstractBusinessDelegate {
 	public SalesInvoice generateInvoice(SalesOrder order, String invDocTypeId)
 			throws BusinessException {
 
-		// List<SalesInvoice> invs = ((ISalesInvoiceService) this
-		// .findEntityService(SalesInvoice.class))
-		// .findBySalesOrderId(order.getId());
-		// if (invs.size() > 0) {
-		// String invCode = invs.get(0).getCode();
-		// throw new BusinessException(
-		// "Sales order is already invoiced ! Check invoice "
-		// + invCode);
-		// }
+		List<SalesInvoice> invs = ((ISalesInvoiceService) this
+				.findEntityService(SalesInvoice.class))
+				.findBySalesOrderId(order.getId());
+		if (invs.size() > 0) {
+			String invCode = invs.get(0).getDocNo();
+			throw new BusinessException(
+					"Sales order is already invoiced ! Check invoice "
+							+ invCode);
+		}
+
+		ISalesInvoiceService srvInvoice = (ISalesInvoiceService) this
+				.findEntityService(SalesInvoice.class);
+		DocType docType = srvInvoice.findById(invDocTypeId, DocType.class);
 
 		SalesInvoice invoice = new SalesInvoice();
 
 		invoice.setCompany(order.getCompany());
 		invoice.setBpAccount(order.getBpAccount());
-		//invoice.setDocType(invDocType);
+		invoice.setDocType(docType);
 		invoice.setDocDate(new Date());
 		invoice.setCurrency(order.getCurrency());
-
 		// invoice.setPriceList(order.getPriceList());
-
 		invoice.setBillToLocation(order.getBillToLocation());
 		invoice.setBillToContact(order.getBillToContact());
-		// invoice.setSalesOrder(order);
-
+		invoice.setSalesOrder(order);
 		invoice.setAmount(order.getAmount());
 		invoice.setNetAmount(order.getNetAmount());
 		invoice.setTaxAmount(order.getTaxAmount());
@@ -88,12 +89,9 @@ public class SalesOrderToInvoice_Bd extends AbstractBusinessDelegate {
 			}
 		}
 
-		ISalesInvoiceService srv = (ISalesInvoiceService) this
-				.findEntityService(SalesInvoice.class);
-		srv.insert(invoice);
-
+		srvInvoice.insert(invoice);
 		order.setInvoiced(true);
-		srv.getEntityManager().merge(order);
+		srvInvoice.getEntityManager().merge(order);
 		return invoice;
 
 	}

@@ -66,4 +66,11 @@
 		referencedTableName="MD_PAY_TERM" 
 		referencedColumnNames="ID"/>
 </changeSet>
+<changeSet author="amathe" id="FK-40">
+	<addForeignKeyConstraint constraintName="FK_TX_SI40" 
+		baseTableName="TX_SI"
+		baseColumnNames="SALESORDER_ID"
+		referencedTableName="TX_SO" 
+		referencedColumnNames="ID"/>
+</changeSet>
 </databaseChangeLog>

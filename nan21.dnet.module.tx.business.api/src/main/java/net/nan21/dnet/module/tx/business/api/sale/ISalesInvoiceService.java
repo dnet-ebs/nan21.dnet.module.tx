@@ -18,6 +18,7 @@ import net.nan21.dnet.module.md.domain.impl.org.Org;
 import net.nan21.dnet.module.tx.domain.impl.sale.SalesInvoice;
 import net.nan21.dnet.module.tx.domain.impl.sale.SalesInvoiceLine;
 import net.nan21.dnet.module.tx.domain.impl.sale.SalesInvoiceTax;
+import net.nan21.dnet.module.tx.domain.impl.sale.SalesOrder;
 
 /**
  * Interface to expose business functions specific for {@link SalesInvoice} domain
@@ -132,6 +133,16 @@ public interface ISalesInvoiceService extends IEntityService<SalesInvoice> {
 	 * Find by ID of reference: paymentTerm.id
 	 */
 	public List<SalesInvoice> findByPaymentTermId(String paymentTermId);
+
+	/**
+	 * Find by reference: salesOrder
+	 */
+	public List<SalesInvoice> findBySalesOrder(SalesOrder salesOrder);
+
+	/**
+	 * Find by ID of reference: salesOrder.id
+	 */
+	public List<SalesInvoice> findBySalesOrderId(String salesOrderId);
 
 	/**
 	 * Find by reference: lines

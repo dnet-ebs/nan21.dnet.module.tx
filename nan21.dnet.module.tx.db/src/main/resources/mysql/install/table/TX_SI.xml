@@ -101,6 +101,7 @@
 			<column name="PAYMENTTERM_ID" type="varchar(64)">
 				<constraints nullable="false"/>
 			</column>
+			<column name="SALESORDER_ID" type="varchar(64)"/>
 		</createTable>
 	</changeSet>
 

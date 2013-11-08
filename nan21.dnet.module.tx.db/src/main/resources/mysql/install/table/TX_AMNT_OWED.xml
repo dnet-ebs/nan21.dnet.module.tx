@@ -27,6 +27,9 @@
 			<column name="CREATEDBY" type="varchar(32)">
 				<constraints nullable="false"/>
 			</column>
+			<column name="CREDIT" type="int(1)">
+				<constraints nullable="false"/>
+			</column>
 			<column name="DUEDATE" type="date">
 				<constraints nullable="false"/>
 			</column>
@@ -43,11 +46,15 @@
 			<column name="REFID" type="varchar(64)">
 				<constraints nullable="false"/>
 			</column>
+			<column name="SALE" type="int(1)">
+				<constraints nullable="false"/>
+			</column>
 			<column name="VERSION" type="bigint(10)"/>
 			<column name="BPACCOUNT_ID" type="varchar(64)">
 				<constraints nullable="false"/>
 			</column>
 			<column name="CURRENCY_ID" type="varchar(64)"/>
+			<column name="PAYMENTMETHOD_ID" type="varchar(64)"/>
 			<column name="PURCHASEINVOICE_ID" type="varchar(64)"/>
 			<column name="PURCHASEORDER_ID" type="varchar(64)"/>
 			<column name="SALESINVOICE_ID" type="varchar(64)"/>

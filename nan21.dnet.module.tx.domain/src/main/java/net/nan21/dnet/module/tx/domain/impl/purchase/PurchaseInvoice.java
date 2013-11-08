@@ -28,8 +28,10 @@ import javax.validation.constraints.NotNull;
 import net.nan21.dnet.core.domain.impl.AbstractAuditable;
 import net.nan21.dnet.module.bd.domain.impl.currency.Currency;
 import net.nan21.dnet.module.md.domain.impl.base.DocType;
+import net.nan21.dnet.module.md.domain.impl.base.PaymentTerm;
 import net.nan21.dnet.module.md.domain.impl.bp.BpAccount;
 import net.nan21.dnet.module.md.domain.impl.org.Org;
+import net.nan21.dnet.module.tx.domain.impl.purchase.PurchaseOrder;
 import org.eclipse.persistence.annotations.CascadeOnDelete;
 import org.eclipse.persistence.config.HintValues;
 import org.eclipse.persistence.config.QueryHints;
@@ -137,6 +139,18 @@ public class PurchaseInvoice extends AbstractAuditable {
 	@ManyToOne(fetch = FetchType.LAZY, targetEntity = Org.class)
 	@JoinColumn(name = "ORG_ID", referencedColumnName = "ID")
 	private Org org;
+
+	@ManyToOne(fetch = FetchType.LAZY, targetEntity = DocType.class)
+	@JoinColumn(name = "PAYMENTMETHOD_ID", referencedColumnName = "ID")
+	private DocType paymentMethod;
+
+	@ManyToOne(fetch = FetchType.LAZY, targetEntity = PaymentTerm.class)
+	@JoinColumn(name = "PAYMENTTERM_ID", referencedColumnName = "ID")
+	private PaymentTerm paymentTerm;
+
+	@ManyToOne(fetch = FetchType.LAZY, targetEntity = PurchaseOrder.class)
+	@JoinColumn(name = "PURCHASEORDER_ID", referencedColumnName = "ID")
+	private PurchaseOrder purchaseOrder;
 
 	@OneToMany(fetch = FetchType.LAZY, targetEntity = PurchaseInvoiceLine.class, mappedBy = "invoice", cascade = CascadeType.ALL)
 	@CascadeOnDelete
@@ -335,6 +349,39 @@ public class PurchaseInvoice extends AbstractAuditable {
 			this.__validate_client_context__(org.getClientId());
 		}
 		this.org = org;
+	}
+
+	public DocType getPaymentMethod() {
+		return this.paymentMethod;
+	}
+
+	public void setPaymentMethod(DocType paymentMethod) {
+		if (paymentMethod != null) {
+			this.__validate_client_context__(paymentMethod.getClientId());
+		}
+		this.paymentMethod = paymentMethod;
+	}
+
+	public PaymentTerm getPaymentTerm() {
+		return this.paymentTerm;
+	}
+
+	public void setPaymentTerm(PaymentTerm paymentTerm) {
+		if (paymentTerm != null) {
+			this.__validate_client_context__(paymentTerm.getClientId());
+		}
+		this.paymentTerm = paymentTerm;
+	}
+
+	public PurchaseOrder getPurchaseOrder() {
+		return this.purchaseOrder;
+	}
+
+	public void setPurchaseOrder(PurchaseOrder purchaseOrder) {
+		if (purchaseOrder != null) {
+			this.__validate_client_context__(purchaseOrder.getClientId());
+		}
+		this.purchaseOrder = purchaseOrder;
 	}
 
 	public Collection<PurchaseInvoiceLine> getLines() {

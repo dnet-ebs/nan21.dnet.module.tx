@@ -5,15 +5,23 @@
  */
 package net.nan21.dnet.module.tx.business.ext.sale.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.util.Assert;
 
 import net.nan21.dnet.core.api.exceptions.BusinessException;
 import net.nan21.dnet.module.md.business.api.org.IDocSequenceValueService;
+import net.nan21.dnet.module.md.domain.impl.base.PaymentTerm;
 import net.nan21.dnet.module.md.domain.impl.org.DocSequenceValue;
+import net.nan21.dnet.module.tx.business.api.financial.IAmountOwedService;
 import net.nan21.dnet.module.tx.business.api.sale.ISalesInvoiceService;
 import net.nan21.dnet.module.tx.business.ext.sale.delegate.SalesInvoiceCopyLines_Bd;
 import net.nan21.dnet.module.tx.business.ext.sale.delegate.SalesInvoice_Bd;
+import net.nan21.dnet.module.tx.domain.impl.financial.AmountOwed;
 import net.nan21.dnet.module.tx.domain.impl.sale.SalesInvoice;
+
+import org.joda.time.DateTime;
 
 /**
  * Business extensions specific for {@link SalesInvoice} domain entity.
@@ -23,16 +31,61 @@ public class SalesInvoice_Service extends
 		net.nan21.dnet.module.tx.business.impl.sale.SalesInvoice_Service
 		implements ISalesInvoiceService {
 
+	/**
+	 * Confirm document
+	 */
 	@Override
 	public void doConfirm(SalesInvoice invoice) throws BusinessException {
+		IAmountOwedService amountSrv = (IAmountOwedService) this
+				.findEntityService(AmountOwed.class);
+		if (amountSrv.findBySalesInvoice(invoice).size() == 0) {
+			List<AmountOwed> amounts = this.createOwedAmounts(invoice);
+			amountSrv.insert(amounts);
+		}
 		invoice.setConfirmed(true);
 		this.getEntityManager().merge(invoice);
 	}
 
+	/**
+	 * Un-confirm ocument
+	 */
 	@Override
 	public void doUnConfirm(SalesInvoice invoice) throws BusinessException {
+		IAmountOwedService amountSrv = (IAmountOwedService) this
+				.findEntityService(AmountOwed.class);
+		List<AmountOwed> amounts = amountSrv.findBySalesInvoiceId(invoice
+				.getId());
+		amountSrv.deleteByIds(this.collectIds(amounts));
 		invoice.setConfirmed(false);
 		this.getEntityManager().merge(invoice);
+	}
+
+	/**
+	 * Generate owed amounts
+	 * 
+	 * @param invoice
+	 * @return
+	 */
+	protected List<AmountOwed> createOwedAmounts(SalesInvoice invoice) {
+		PaymentTerm paymentTerm = invoice.getPaymentTerm();
+		List<AmountOwed> result = new ArrayList<AmountOwed>();
+		if (paymentTerm != null) {
+			DateTime dueDate = new DateTime(invoice.getDocDate())
+					.plusDays(paymentTerm.getDays());
+
+			AmountOwed amount = new AmountOwed();
+			amount.setBpAccount(invoice.getBpAccount());
+			// amount.setCompany(invoice.getCompany());
+			amount.setSalesInvoice(invoice);
+			amount.setSale(true);
+			amount.setCurrency(invoice.getCurrency());
+			amount.setPaymentMethod(invoice.getPaymentMethod());
+			amount.setDueDate(dueDate.toDate());
+			amount.setAmount(invoice.getAmount());
+
+			result.add(amount);
+		}
+		return result;
 	}
 
 	@Override

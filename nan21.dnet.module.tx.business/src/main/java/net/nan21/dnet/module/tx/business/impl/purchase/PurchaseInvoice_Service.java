@@ -11,11 +11,13 @@ import net.nan21.dnet.core.api.session.Session;
 import net.nan21.dnet.core.business.service.entity.AbstractEntityService;
 import net.nan21.dnet.module.bd.domain.impl.currency.Currency;
 import net.nan21.dnet.module.md.domain.impl.base.DocType;
+import net.nan21.dnet.module.md.domain.impl.base.PaymentTerm;
 import net.nan21.dnet.module.md.domain.impl.bp.BpAccount;
 import net.nan21.dnet.module.md.domain.impl.org.Org;
 import net.nan21.dnet.module.tx.domain.impl.purchase.PurchaseInvoice;
 import net.nan21.dnet.module.tx.domain.impl.purchase.PurchaseInvoiceLine;
 import net.nan21.dnet.module.tx.domain.impl.purchase.PurchaseInvoiceTax;
+import net.nan21.dnet.module.tx.domain.impl.purchase.PurchaseOrder;
 
 /**
  * Repository functionality for {@link PurchaseInvoice} domain entity. It contains
@@ -144,6 +146,65 @@ public class PurchaseInvoice_Service
 				.setParameter("clientId",
 						Session.user.get().getClient().getId())
 				.setParameter("orgId", orgId).getResultList();
+	}
+	/**
+	 * Find by reference: paymentMethod
+	 */
+	public List<PurchaseInvoice> findByPaymentMethod(DocType paymentMethod) {
+		return this.findByPaymentMethodId(paymentMethod.getId());
+	}
+	/**
+	 * Find by ID of reference: paymentMethod.id
+	 */
+	public List<PurchaseInvoice> findByPaymentMethodId(String paymentMethodId) {
+		return (List<PurchaseInvoice>) this
+				.getEntityManager()
+				.createQuery(
+						"select e from PurchaseInvoice e where e.clientId = :clientId and e.paymentMethod.id = :paymentMethodId",
+						PurchaseInvoice.class)
+				.setParameter("clientId",
+						Session.user.get().getClient().getId())
+				.setParameter("paymentMethodId", paymentMethodId)
+				.getResultList();
+	}
+	/**
+	 * Find by reference: paymentTerm
+	 */
+	public List<PurchaseInvoice> findByPaymentTerm(PaymentTerm paymentTerm) {
+		return this.findByPaymentTermId(paymentTerm.getId());
+	}
+	/**
+	 * Find by ID of reference: paymentTerm.id
+	 */
+	public List<PurchaseInvoice> findByPaymentTermId(String paymentTermId) {
+		return (List<PurchaseInvoice>) this
+				.getEntityManager()
+				.createQuery(
+						"select e from PurchaseInvoice e where e.clientId = :clientId and e.paymentTerm.id = :paymentTermId",
+						PurchaseInvoice.class)
+				.setParameter("clientId",
+						Session.user.get().getClient().getId())
+				.setParameter("paymentTermId", paymentTermId).getResultList();
+	}
+	/**
+	 * Find by reference: purchaseOrder
+	 */
+	public List<PurchaseInvoice> findByPurchaseOrder(PurchaseOrder purchaseOrder) {
+		return this.findByPurchaseOrderId(purchaseOrder.getId());
+	}
+	/**
+	 * Find by ID of reference: purchaseOrder.id
+	 */
+	public List<PurchaseInvoice> findByPurchaseOrderId(String purchaseOrderId) {
+		return (List<PurchaseInvoice>) this
+				.getEntityManager()
+				.createQuery(
+						"select e from PurchaseInvoice e where e.clientId = :clientId and e.purchaseOrder.id = :purchaseOrderId",
+						PurchaseInvoice.class)
+				.setParameter("clientId",
+						Session.user.get().getClient().getId())
+				.setParameter("purchaseOrderId", purchaseOrderId)
+				.getResultList();
 	}
 	/**
 	 * Find by reference: lines

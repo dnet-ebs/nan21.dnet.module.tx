@@ -10,6 +10,7 @@ import javax.persistence.EntityManager;
 import net.nan21.dnet.core.api.session.Session;
 import net.nan21.dnet.core.business.service.entity.AbstractEntityService;
 import net.nan21.dnet.module.bd.domain.impl.currency.Currency;
+import net.nan21.dnet.module.md.domain.impl.base.DocType;
 import net.nan21.dnet.module.md.domain.impl.bp.BpAccount;
 import net.nan21.dnet.module.tx.business.api.financial.IAmountOwedService;
 import net.nan21.dnet.module.tx.domain.impl.financial.AmountOwed;
@@ -155,6 +156,26 @@ public class AmountOwed_Service extends AbstractEntityService<AmountOwed>
 				.setParameter("clientId",
 						Session.user.get().getClient().getId())
 				.setParameter("purchaseInvoiceId", purchaseInvoiceId)
+				.getResultList();
+	}
+	/**
+	 * Find by reference: paymentMethod
+	 */
+	public List<AmountOwed> findByPaymentMethod(DocType paymentMethod) {
+		return this.findByPaymentMethodId(paymentMethod.getId());
+	}
+	/**
+	 * Find by ID of reference: paymentMethod.id
+	 */
+	public List<AmountOwed> findByPaymentMethodId(String paymentMethodId) {
+		return (List<AmountOwed>) this
+				.getEntityManager()
+				.createQuery(
+						"select e from AmountOwed e where e.clientId = :clientId and e.paymentMethod.id = :paymentMethodId",
+						AmountOwed.class)
+				.setParameter("clientId",
+						Session.user.get().getClient().getId())
+				.setParameter("paymentMethodId", paymentMethodId)
 				.getResultList();
 	}
 }

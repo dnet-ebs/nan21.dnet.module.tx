@@ -10,11 +10,13 @@ import net.nan21.dnet.core.api.exceptions.BusinessException;
 import net.nan21.dnet.core.api.service.business.IEntityService;
 import net.nan21.dnet.module.bd.domain.impl.currency.Currency;
 import net.nan21.dnet.module.md.domain.impl.base.DocType;
+import net.nan21.dnet.module.md.domain.impl.base.PaymentTerm;
 import net.nan21.dnet.module.md.domain.impl.bp.BpAccount;
 import net.nan21.dnet.module.md.domain.impl.org.Org;
 import net.nan21.dnet.module.tx.domain.impl.purchase.PurchaseInvoice;
 import net.nan21.dnet.module.tx.domain.impl.purchase.PurchaseInvoiceLine;
 import net.nan21.dnet.module.tx.domain.impl.purchase.PurchaseInvoiceTax;
+import net.nan21.dnet.module.tx.domain.impl.purchase.PurchaseOrder;
 
 /**
  * Interface to expose business functions specific for {@link PurchaseInvoice} domain
@@ -91,6 +93,36 @@ public interface IPurchaseInvoiceService
 	 * Find by ID of reference: org.id
 	 */
 	public List<PurchaseInvoice> findByOrgId(String orgId);
+
+	/**
+	 * Find by reference: paymentMethod
+	 */
+	public List<PurchaseInvoice> findByPaymentMethod(DocType paymentMethod);
+
+	/**
+	 * Find by ID of reference: paymentMethod.id
+	 */
+	public List<PurchaseInvoice> findByPaymentMethodId(String paymentMethodId);
+
+	/**
+	 * Find by reference: paymentTerm
+	 */
+	public List<PurchaseInvoice> findByPaymentTerm(PaymentTerm paymentTerm);
+
+	/**
+	 * Find by ID of reference: paymentTerm.id
+	 */
+	public List<PurchaseInvoice> findByPaymentTermId(String paymentTermId);
+
+	/**
+	 * Find by reference: purchaseOrder
+	 */
+	public List<PurchaseInvoice> findByPurchaseOrder(PurchaseOrder purchaseOrder);
+
+	/**
+	 * Find by ID of reference: purchaseOrder.id
+	 */
+	public List<PurchaseInvoice> findByPurchaseOrderId(String purchaseOrderId);
 
 	/**
 	 * Find by reference: lines

@@ -45,4 +45,11 @@
 		referencedTableName="TX_PI" 
 		referencedColumnNames="ID"/>
 </changeSet>
+<changeSet author="amathe" id="FK-10">
+	<addForeignKeyConstraint constraintName="FK_TX_AMNT_OWED10" 
+		baseTableName="TX_AMNT_OWED"
+		baseColumnNames="PAYMENTMETHOD_ID"
+		referencedTableName="MD_DOC_TYPE" 
+		referencedColumnNames="ID"/>
+</changeSet>
 </databaseChangeLog>

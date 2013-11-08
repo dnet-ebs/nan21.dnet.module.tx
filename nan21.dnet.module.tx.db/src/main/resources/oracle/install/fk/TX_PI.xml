@@ -38,4 +38,25 @@
 		referencedTableName="MD_ORG" 
 		referencedColumnNames="ID"/>
 </changeSet>
+<changeSet author="amathe" id="FK-30">
+	<addForeignKeyConstraint constraintName="FK_TX_PI30" 
+		baseTableName="TX_PI"
+		baseColumnNames="PAYMENTMETHOD_ID"
+		referencedTableName="MD_DOC_TYPE" 
+		referencedColumnNames="ID"/>
+</changeSet>
+<changeSet author="amathe" id="FK-31">
+	<addForeignKeyConstraint constraintName="FK_TX_PI31" 
+		baseTableName="TX_PI"
+		baseColumnNames="PAYMENTTERM_ID"
+		referencedTableName="MD_PAY_TERM" 
+		referencedColumnNames="ID"/>
+</changeSet>
+<changeSet author="amathe" id="FK-40">
+	<addForeignKeyConstraint constraintName="FK_TX_PI40" 
+		baseTableName="TX_PI"
+		baseColumnNames="PURCHASEORDER_ID"
+		referencedTableName="TX_PO" 
+		referencedColumnNames="ID"/>
+</changeSet>
 </databaseChangeLog>

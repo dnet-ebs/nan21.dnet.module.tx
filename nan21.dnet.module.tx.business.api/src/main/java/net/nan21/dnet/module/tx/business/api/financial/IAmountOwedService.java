@@ -8,6 +8,7 @@ package net.nan21.dnet.module.tx.business.api.financial;
 import java.util.List;
 import net.nan21.dnet.core.api.service.business.IEntityService;
 import net.nan21.dnet.module.bd.domain.impl.currency.Currency;
+import net.nan21.dnet.module.md.domain.impl.base.DocType;
 import net.nan21.dnet.module.md.domain.impl.bp.BpAccount;
 import net.nan21.dnet.module.tx.domain.impl.financial.AmountOwed;
 import net.nan21.dnet.module.tx.domain.impl.purchase.PurchaseInvoice;
@@ -81,4 +82,14 @@ public interface IAmountOwedService extends IEntityService<AmountOwed> {
 	 * Find by ID of reference: purchaseInvoice.id
 	 */
 	public List<AmountOwed> findByPurchaseInvoiceId(String purchaseInvoiceId);
+
+	/**
+	 * Find by reference: paymentMethod
+	 */
+	public List<AmountOwed> findByPaymentMethod(DocType paymentMethod);
+
+	/**
+	 * Find by ID of reference: paymentMethod.id
+	 */
+	public List<AmountOwed> findByPaymentMethodId(String paymentMethodId);
 }

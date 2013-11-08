@@ -20,6 +20,7 @@ import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import net.nan21.dnet.core.domain.impl.AbstractAuditable;
 import net.nan21.dnet.module.bd.domain.impl.currency.Currency;
+import net.nan21.dnet.module.md.domain.impl.base.DocType;
 import net.nan21.dnet.module.md.domain.impl.bp.BpAccount;
 import net.nan21.dnet.module.tx.domain.impl.purchase.PurchaseInvoice;
 import net.nan21.dnet.module.tx.domain.impl.purchase.PurchaseOrder;
@@ -56,6 +57,14 @@ public class AmountOwed extends AbstractAuditable {
 	@Column(name = "AMOUNTREMAINED", nullable = false, precision = 21, scale = 6)
 	private BigDecimal amountRemained;
 
+	@NotNull
+	@Column(name = "SALE", nullable = false)
+	private Boolean sale;
+
+	@NotNull
+	@Column(name = "CREDIT", nullable = false)
+	private Boolean credit;
+
 	@ManyToOne(fetch = FetchType.LAZY, targetEntity = BpAccount.class)
 	@JoinColumn(name = "BPACCOUNT_ID", referencedColumnName = "ID")
 	private BpAccount bpAccount;
@@ -79,6 +88,10 @@ public class AmountOwed extends AbstractAuditable {
 	@ManyToOne(fetch = FetchType.LAZY, targetEntity = PurchaseInvoice.class)
 	@JoinColumn(name = "PURCHASEINVOICE_ID", referencedColumnName = "ID")
 	private PurchaseInvoice purchaseInvoice;
+
+	@ManyToOne(fetch = FetchType.LAZY, targetEntity = DocType.class)
+	@JoinColumn(name = "PAYMENTMETHOD_ID", referencedColumnName = "ID")
+	private DocType paymentMethod;
 
 	public Date getDueDate() {
 		return this.dueDate;
@@ -118,6 +131,22 @@ public class AmountOwed extends AbstractAuditable {
 
 	public void setAmountRemained(BigDecimal amountRemained) {
 		this.amountRemained = amountRemained;
+	}
+
+	public Boolean getSale() {
+		return this.sale;
+	}
+
+	public void setSale(Boolean sale) {
+		this.sale = sale;
+	}
+
+	public Boolean getCredit() {
+		return this.credit;
+	}
+
+	public void setCredit(Boolean credit) {
+		this.credit = credit;
 	}
 
 	public BpAccount getBpAccount() {
@@ -186,6 +215,17 @@ public class AmountOwed extends AbstractAuditable {
 		this.purchaseInvoice = purchaseInvoice;
 	}
 
+	public DocType getPaymentMethod() {
+		return this.paymentMethod;
+	}
+
+	public void setPaymentMethod(DocType paymentMethod) {
+		if (paymentMethod != null) {
+			this.__validate_client_context__(paymentMethod.getClientId());
+		}
+		this.paymentMethod = paymentMethod;
+	}
+
 	@PrePersist
 	public void prePersist() {
 		super.prePersist();
@@ -197,6 +237,12 @@ public class AmountOwed extends AbstractAuditable {
 		}
 		if (this.amountRemained == null) {
 			this.amountRemained = new BigDecimal("0");
+		}
+		if (this.sale == null) {
+			this.sale = new Boolean(false);
+		}
+		if (this.credit == null) {
+			this.credit = new Boolean(false);
 		}
 	}
 }

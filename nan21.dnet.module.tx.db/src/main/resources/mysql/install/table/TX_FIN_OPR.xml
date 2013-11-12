@@ -5,17 +5,11 @@
 		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
 
 	<changeSet author="amathe" id="TBL">
-		<createTable tableName="TX_AMNT_OWED">
+		<createTable tableName="TX_FIN_OPR">
 			<column name="ACTIVE" type="int(1)">
 				<constraints nullable="false"/>
 			</column>
-			<column name="AMOUNTDUE" type="decimal(21,6)">
-				<constraints nullable="false"/>
-			</column>
-			<column name="AMOUNTINITIAL" type="decimal(21,6)">
-				<constraints nullable="false"/>
-			</column>
-			<column name="AMOUNTPAYED" type="decimal(21,6)">
+			<column name="AMOUNT" type="decimal(21,6)">
 				<constraints nullable="false"/>
 			</column>
 			<column name="CLIENTID" type="varchar(64)">
@@ -27,10 +21,10 @@
 			<column name="CREATEDBY" type="varchar(32)">
 				<constraints nullable="false"/>
 			</column>
-			<column name="CREDIT" type="int(1)">
+			<column name="DIRECTION" type="varchar(8)">
 				<constraints nullable="false"/>
 			</column>
-			<column name="DUEDATE" type="date">
+			<column name="EVENTDATE" type="datetime">
 				<constraints nullable="false"/>
 			</column>
 			<column name="ID" type="varchar(64)">
@@ -46,26 +40,16 @@
 			<column name="REFID" type="varchar(64)">
 				<constraints nullable="false"/>
 			</column>
-			<column name="SALE" type="int(1)">
-				<constraints nullable="false"/>
-			</column>
 			<column name="VERSION" type="bigint(10)"/>
-			<column name="BPACCOUNT_ID" type="varchar(64)">
-				<constraints nullable="false"/>
-			</column>
-			<column name="CURRENCY_ID" type="varchar(64)"/>
-			<column name="PAYMENTMETHOD_ID" type="varchar(64)"/>
-			<column name="PURCHASEINVOICE_ID" type="varchar(64)"/>
-			<column name="PURCHASEORDER_ID" type="varchar(64)"/>
-			<column name="SALESINVOICE_ID" type="varchar(64)"/>
-			<column name="SALESORDER_ID" type="varchar(64)"/>
+			<column name="FINACCOUNT_ID" type="varchar(64)"/>
+			<column name="PAYMENT_ID" type="varchar(64)"/>
 		</createTable>
 	</changeSet>
 
 	<changeSet author="amathe" id="PK">
 		<addPrimaryKey 
-			constraintName="PK_TX_AMNT_OWED"
-			tableName="TX_AMNT_OWED"
+			constraintName="PK_TX_FIN_OPR"
+			tableName="TX_FIN_OPR"
 			columnNames="ID"/>
 	</changeSet>
 

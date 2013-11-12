@@ -44,8 +44,8 @@ public class AmountOwed extends AbstractAuditable {
 	private Date dueDate;
 
 	@NotNull
-	@Column(name = "AMOUNT", nullable = false, precision = 21, scale = 6)
-	private BigDecimal amount;
+	@Column(name = "AMOUNTINITIAL", nullable = false, precision = 21, scale = 6)
+	private BigDecimal amountInitial;
 
 	/**Total amount payed until now */
 	@NotNull
@@ -54,8 +54,8 @@ public class AmountOwed extends AbstractAuditable {
 
 	/**The amount remained to be paid. */
 	@NotNull
-	@Column(name = "AMOUNTREMAINED", nullable = false, precision = 21, scale = 6)
-	private BigDecimal amountRemained;
+	@Column(name = "AMOUNTDUE", nullable = false, precision = 21, scale = 6)
+	private BigDecimal amountDue;
 
 	@NotNull
 	@Column(name = "SALE", nullable = false)
@@ -109,12 +109,12 @@ public class AmountOwed extends AbstractAuditable {
 	public void setDueInDays(Integer dueInDays) {
 	}
 
-	public BigDecimal getAmount() {
-		return this.amount;
+	public BigDecimal getAmountInitial() {
+		return this.amountInitial;
 	}
 
-	public void setAmount(BigDecimal amount) {
-		this.amount = amount;
+	public void setAmountInitial(BigDecimal amountInitial) {
+		this.amountInitial = amountInitial;
 	}
 
 	public BigDecimal getAmountPayed() {
@@ -125,12 +125,12 @@ public class AmountOwed extends AbstractAuditable {
 		this.amountPayed = amountPayed;
 	}
 
-	public BigDecimal getAmountRemained() {
-		return this.amountRemained;
+	public BigDecimal getAmountDue() {
+		return this.amountDue;
 	}
 
-	public void setAmountRemained(BigDecimal amountRemained) {
-		this.amountRemained = amountRemained;
+	public void setAmountDue(BigDecimal amountDue) {
+		this.amountDue = amountDue;
 	}
 
 	public Boolean getSale() {
@@ -229,14 +229,14 @@ public class AmountOwed extends AbstractAuditable {
 	@PrePersist
 	public void prePersist() {
 		super.prePersist();
-		if (this.amount == null) {
-			this.amount = new BigDecimal("0");
+		if (this.amountInitial == null) {
+			this.amountInitial = new BigDecimal("0");
 		}
 		if (this.amountPayed == null) {
 			this.amountPayed = new BigDecimal("0");
 		}
-		if (this.amountRemained == null) {
-			this.amountRemained = new BigDecimal("0");
+		if (this.amountDue == null) {
+			this.amountDue = new BigDecimal("0");
 		}
 		if (this.sale == null) {
 			this.sale = new Boolean(false);

@@ -27,6 +27,9 @@
 			<column name="CREATEDBY" type="varchar2(32)">
 				<constraints nullable="false"/>
 			</column>
+			<column name="DIRECTION" type="varchar2(8)">
+				<constraints nullable="false"/>
+			</column>
 			<column name="DOCDATE" type="DATE">
 				<constraints nullable="false"/>
 			</column>
@@ -52,7 +55,8 @@
 			<column name="REFID" type="varchar2(64)">
 				<constraints nullable="false"/>
 			</column>
-			<column name="SOURCEDOCNO" type="varchar2(255)">
+			<column name="SOURCEDOCNO" type="varchar2(255)"/>
+			<column name="USAGE" type="varchar2(16)">
 				<constraints nullable="false"/>
 			</column>
 			<column name="VERSION" type="number(10)"/>
@@ -63,6 +67,8 @@
 				<constraints nullable="false"/>
 			</column>
 			<column name="BPACCOUNT_ID" type="varchar2(64)"/>
+			<column name="BPBANKACCOUNT_ID" type="varchar2(64)"/>
+			<column name="BPCONTACT_ID" type="varchar2(64)"/>
 			<column name="COMPANY_ID" type="varchar2(64)">
 				<constraints nullable="false"/>
 			</column>
@@ -72,6 +78,7 @@
 			<column name="DOCTYPE_ID" type="varchar2(64)">
 				<constraints nullable="false"/>
 			</column>
+			<column name="FINACCOUNT_ID" type="varchar2(64)"/>
 		</createTable>
 	</changeSet>
 

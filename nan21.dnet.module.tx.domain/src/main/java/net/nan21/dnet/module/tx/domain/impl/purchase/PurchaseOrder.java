@@ -28,6 +28,7 @@ import javax.validation.constraints.NotNull;
 import net.nan21.dnet.core.domain.impl.AbstractAuditable;
 import net.nan21.dnet.module.bd.domain.impl.currency.Currency;
 import net.nan21.dnet.module.md.domain.impl.base.DocType;
+import net.nan21.dnet.module.md.domain.impl.base.PaymentTerm;
 import net.nan21.dnet.module.md.domain.impl.bp.BpAccount;
 import net.nan21.dnet.module.md.domain.impl.org.Org;
 import org.eclipse.persistence.annotations.CascadeOnDelete;
@@ -125,6 +126,14 @@ public class PurchaseOrder extends AbstractAuditable {
 	@ManyToOne(fetch = FetchType.LAZY, targetEntity = Org.class)
 	@JoinColumn(name = "ORG_ID", referencedColumnName = "ID")
 	private Org org;
+
+	@ManyToOne(fetch = FetchType.LAZY, targetEntity = DocType.class)
+	@JoinColumn(name = "PAYMENTMETHOD_ID", referencedColumnName = "ID")
+	private DocType paymentMethod;
+
+	@ManyToOne(fetch = FetchType.LAZY, targetEntity = PaymentTerm.class)
+	@JoinColumn(name = "PAYMENTTERM_ID", referencedColumnName = "ID")
+	private PaymentTerm paymentTerm;
 
 	@OneToMany(fetch = FetchType.LAZY, targetEntity = PurchaseOrderLine.class, mappedBy = "order", cascade = CascadeType.ALL)
 	@CascadeOnDelete
@@ -299,6 +308,28 @@ public class PurchaseOrder extends AbstractAuditable {
 			this.__validate_client_context__(org.getClientId());
 		}
 		this.org = org;
+	}
+
+	public DocType getPaymentMethod() {
+		return this.paymentMethod;
+	}
+
+	public void setPaymentMethod(DocType paymentMethod) {
+		if (paymentMethod != null) {
+			this.__validate_client_context__(paymentMethod.getClientId());
+		}
+		this.paymentMethod = paymentMethod;
+	}
+
+	public PaymentTerm getPaymentTerm() {
+		return this.paymentTerm;
+	}
+
+	public void setPaymentTerm(PaymentTerm paymentTerm) {
+		if (paymentTerm != null) {
+			this.__validate_client_context__(paymentTerm.getClientId());
+		}
+		this.paymentTerm = paymentTerm;
 	}
 
 	public Collection<PurchaseOrderLine> getLines() {

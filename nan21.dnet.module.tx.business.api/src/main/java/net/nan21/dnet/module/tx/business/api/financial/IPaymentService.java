@@ -9,8 +9,11 @@ import java.util.List;
 import net.nan21.dnet.core.api.exceptions.BusinessException;
 import net.nan21.dnet.core.api.service.business.IEntityService;
 import net.nan21.dnet.module.bd.domain.impl.currency.Currency;
+import net.nan21.dnet.module.md.domain.impl.base.BankAccount;
 import net.nan21.dnet.module.md.domain.impl.base.DocType;
 import net.nan21.dnet.module.md.domain.impl.bp.BpAccount;
+import net.nan21.dnet.module.md.domain.impl.bp.BpContact;
+import net.nan21.dnet.module.md.domain.impl.org.FinancialAccount;
 import net.nan21.dnet.module.md.domain.impl.org.Org;
 import net.nan21.dnet.module.tx.domain.impl.financial.Payment;
 import net.nan21.dnet.module.tx.domain.impl.financial.PaymentLine;
@@ -28,6 +31,8 @@ public interface IPaymentService extends IEntityService<Payment> {
 	public void doPost(Payment payment) throws BusinessException;
 
 	public void doUnPost(Payment payment) throws BusinessException;
+
+	public void doRemoveAmounts(Payment payment) throws BusinessException;
 
 	/**
 	 * Find by unique key
@@ -65,6 +70,16 @@ public interface IPaymentService extends IEntityService<Payment> {
 	public List<Payment> findByCompanyId(String companyId);
 
 	/**
+	 * Find by reference: finAccount
+	 */
+	public List<Payment> findByFinAccount(FinancialAccount finAccount);
+
+	/**
+	 * Find by ID of reference: finAccount.id
+	 */
+	public List<Payment> findByFinAccountId(String finAccountId);
+
+	/**
 	 * Find by reference: bpAccount
 	 */
 	public List<Payment> findByBpAccount(BpAccount bpAccount);
@@ -73,6 +88,26 @@ public interface IPaymentService extends IEntityService<Payment> {
 	 * Find by ID of reference: bpAccount.id
 	 */
 	public List<Payment> findByBpAccountId(String bpAccountId);
+
+	/**
+	 * Find by reference: bpBankAccount
+	 */
+	public List<Payment> findByBpBankAccount(BankAccount bpBankAccount);
+
+	/**
+	 * Find by ID of reference: bpBankAccount.id
+	 */
+	public List<Payment> findByBpBankAccountId(String bpBankAccountId);
+
+	/**
+	 * Find by reference: bpContact
+	 */
+	public List<Payment> findByBpContact(BpContact bpContact);
+
+	/**
+	 * Find by ID of reference: bpContact.id
+	 */
+	public List<Payment> findByBpContactId(String bpContactId);
 
 	/**
 	 * Find by reference: lines

@@ -45,6 +45,9 @@
 		<class>net.nan21.dnet.module.bd.domain.impl.geo.Region</class>
 		<class>net.nan21.dnet.module.bd.domain.impl.uom.Uom</class>
 		<class>net.nan21.dnet.module.bd.domain.impl.uom.UomType</class>
+		<class>net.nan21.dnet.module.md.domain.impl.base.Bank</class>
+		<class>net.nan21.dnet.module.md.domain.impl.base.BankAccount</class>
+		<class>net.nan21.dnet.module.md.domain.impl.base.BankBranch</class>
 		<class>net.nan21.dnet.module.md.domain.impl.base.DocType</class>
 		<class>net.nan21.dnet.module.md.domain.impl.base.PaymentTerm</class>
 		<class>net.nan21.dnet.module.md.domain.impl.base.Tax</class>
@@ -61,6 +64,7 @@
 		<class>net.nan21.dnet.module.md.domain.impl.mm.ProductAccountType</class>
 		<class>net.nan21.dnet.module.md.domain.impl.mm.ProductCategory</class>
 		<class>net.nan21.dnet.module.md.domain.impl.mm.ProductManufacturer</class>
+		<class>net.nan21.dnet.module.md.domain.impl.org.FinancialAccount</class>
 		<class>net.nan21.dnet.module.md.domain.impl.org.Inventory</class>
 		<class>net.nan21.dnet.module.md.domain.impl.org.InventoryLocation</class>
 		<class>net.nan21.dnet.module.md.domain.impl.org.InventoryLocationType</class>

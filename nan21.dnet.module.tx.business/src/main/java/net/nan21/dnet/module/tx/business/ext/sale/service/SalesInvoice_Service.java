@@ -5,6 +5,7 @@
  */
 package net.nan21.dnet.module.tx.business.ext.sale.service;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,6 +37,13 @@ public class SalesInvoice_Service extends
 	 */
 	@Override
 	public void doConfirm(SalesInvoice invoice) throws BusinessException {
+		// validate invoice before confirm
+		String msg = "Cannot confirm invoice `" + invoice.getDocNo() + "`.";
+		Assert.notNull(invoice.getPaymentMethod(), msg
+				+ "No payment method specified.");
+		Assert.notNull(invoice.getPaymentTerm(), msg
+				+ "No payment term specified.");
+
 		IAmountOwedService amountSrv = (IAmountOwedService) this
 				.findEntityService(AmountOwed.class);
 		if (amountSrv.findBySalesInvoice(invoice).size() == 0) {
@@ -81,7 +89,10 @@ public class SalesInvoice_Service extends
 			amount.setCurrency(invoice.getCurrency());
 			amount.setPaymentMethod(invoice.getPaymentMethod());
 			amount.setDueDate(dueDate.toDate());
-			amount.setAmount(invoice.getAmount());
+			amount.setAmountInitial(invoice.getAmount());
+
+			amount.setAmountDue(invoice.getAmount());
+			amount.setAmountPayed(new BigDecimal("0"));
 
 			result.add(amount);
 		}
@@ -121,12 +132,9 @@ public class SalesInvoice_Service extends
 	 */
 	@Override
 	protected void preInsert(SalesInvoice e) throws BusinessException {
-		if (e.getDocNo() == null) {
-			Assert.notNull(e.getCompany(),
-					"An invoice must belong to a company!");
-			Assert.notNull(e.getDocType(),
-					"Specify a document type for invoice!");
-
+		Assert.notNull(e.getCompany(), "An invoice must belong to a company!");
+		Assert.notNull(e.getDocType(), "Specify a document type for invoice!");
+		if (e.getDocNo() == null || "".equals(e.getDocNo())) {
 			IDocSequenceValueService srv = (IDocSequenceValueService) this
 					.findEntityService(DocSequenceValue.class);
 			DocSequenceValue seqVal = srv.getNextValue(e.getCompany().getId(),

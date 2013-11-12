@@ -27,8 +27,11 @@ import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 import net.nan21.dnet.core.domain.impl.AbstractAuditable;
 import net.nan21.dnet.module.bd.domain.impl.currency.Currency;
+import net.nan21.dnet.module.md.domain.impl.base.BankAccount;
 import net.nan21.dnet.module.md.domain.impl.base.DocType;
 import net.nan21.dnet.module.md.domain.impl.bp.BpAccount;
+import net.nan21.dnet.module.md.domain.impl.bp.BpContact;
+import net.nan21.dnet.module.md.domain.impl.org.FinancialAccount;
 import net.nan21.dnet.module.md.domain.impl.org.Org;
 import org.eclipse.persistence.annotations.CascadeOnDelete;
 import org.eclipse.persistence.config.HintValues;
@@ -55,6 +58,14 @@ public class Payment extends AbstractAuditable {
 	public static final String NQ_FIND_BY_DOCNO = "Payment.findByDocno";
 
 	@NotBlank
+	@Column(name = "DIRECTION", nullable = false, length = 8)
+	private String direction;
+
+	@NotBlank
+	@Column(name = "USAGE", nullable = false, length = 16)
+	private String usage;
+
+	@NotBlank
 	@Column(name = "DOCNO", nullable = false, length = 255)
 	private String docNo;
 
@@ -63,8 +74,7 @@ public class Payment extends AbstractAuditable {
 	@Column(name = "DOCDATE", nullable = false)
 	private Date docDate;
 
-	@NotBlank
-	@Column(name = "SOURCEDOCNO", nullable = false, length = 255)
+	@Column(name = "SOURCEDOCNO", length = 255)
 	private String sourceDocNo;
 
 	@Column(name = "AMOUNT", precision = 21, scale = 6)
@@ -112,13 +122,41 @@ public class Payment extends AbstractAuditable {
 	@JoinColumn(name = "COMPANY_ID", referencedColumnName = "ID")
 	private Org company;
 
+	@ManyToOne(fetch = FetchType.LAZY, targetEntity = FinancialAccount.class)
+	@JoinColumn(name = "FINACCOUNT_ID", referencedColumnName = "ID")
+	private FinancialAccount finAccount;
+
 	@ManyToOne(fetch = FetchType.LAZY, targetEntity = BpAccount.class)
 	@JoinColumn(name = "BPACCOUNT_ID", referencedColumnName = "ID")
 	private BpAccount bpAccount;
 
+	@ManyToOne(fetch = FetchType.LAZY, targetEntity = BankAccount.class)
+	@JoinColumn(name = "BPBANKACCOUNT_ID", referencedColumnName = "ID")
+	private BankAccount bpBankAccount;
+
+	@ManyToOne(fetch = FetchType.LAZY, targetEntity = BpContact.class)
+	@JoinColumn(name = "BPCONTACT_ID", referencedColumnName = "ID")
+	private BpContact bpContact;
+
 	@OneToMany(fetch = FetchType.LAZY, targetEntity = PaymentLine.class, mappedBy = "payment", cascade = CascadeType.ALL)
 	@CascadeOnDelete
 	private Collection<PaymentLine> lines;
+
+	public String getDirection() {
+		return this.direction;
+	}
+
+	public void setDirection(String direction) {
+		this.direction = direction;
+	}
+
+	public String getUsage() {
+		return this.usage;
+	}
+
+	public void setUsage(String usage) {
+		this.usage = usage;
+	}
 
 	public String getDocNo() {
 		return this.docNo;
@@ -249,6 +287,17 @@ public class Payment extends AbstractAuditable {
 		this.company = company;
 	}
 
+	public FinancialAccount getFinAccount() {
+		return this.finAccount;
+	}
+
+	public void setFinAccount(FinancialAccount finAccount) {
+		if (finAccount != null) {
+			this.__validate_client_context__(finAccount.getClientId());
+		}
+		this.finAccount = finAccount;
+	}
+
 	public BpAccount getBpAccount() {
 		return this.bpAccount;
 	}
@@ -258,6 +307,28 @@ public class Payment extends AbstractAuditable {
 			this.__validate_client_context__(bpAccount.getClientId());
 		}
 		this.bpAccount = bpAccount;
+	}
+
+	public BankAccount getBpBankAccount() {
+		return this.bpBankAccount;
+	}
+
+	public void setBpBankAccount(BankAccount bpBankAccount) {
+		if (bpBankAccount != null) {
+			this.__validate_client_context__(bpBankAccount.getClientId());
+		}
+		this.bpBankAccount = bpBankAccount;
+	}
+
+	public BpContact getBpContact() {
+		return this.bpContact;
+	}
+
+	public void setBpContact(BpContact bpContact) {
+		if (bpContact != null) {
+			this.__validate_client_context__(bpContact.getClientId());
+		}
+		this.bpContact = bpContact;
 	}
 
 	public Collection<PaymentLine> getLines() {

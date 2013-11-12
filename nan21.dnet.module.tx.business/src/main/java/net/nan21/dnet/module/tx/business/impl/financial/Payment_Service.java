@@ -10,8 +10,11 @@ import javax.persistence.EntityManager;
 import net.nan21.dnet.core.api.session.Session;
 import net.nan21.dnet.core.business.service.entity.AbstractEntityService;
 import net.nan21.dnet.module.bd.domain.impl.currency.Currency;
+import net.nan21.dnet.module.md.domain.impl.base.BankAccount;
 import net.nan21.dnet.module.md.domain.impl.base.DocType;
 import net.nan21.dnet.module.md.domain.impl.bp.BpAccount;
+import net.nan21.dnet.module.md.domain.impl.bp.BpContact;
+import net.nan21.dnet.module.md.domain.impl.org.FinancialAccount;
 import net.nan21.dnet.module.md.domain.impl.org.Org;
 import net.nan21.dnet.module.tx.domain.impl.financial.Payment;
 import net.nan21.dnet.module.tx.domain.impl.financial.PaymentLine;
@@ -105,6 +108,25 @@ public class Payment_Service extends AbstractEntityService<Payment> {
 				.setParameter("companyId", companyId).getResultList();
 	}
 	/**
+	 * Find by reference: finAccount
+	 */
+	public List<Payment> findByFinAccount(FinancialAccount finAccount) {
+		return this.findByFinAccountId(finAccount.getId());
+	}
+	/**
+	 * Find by ID of reference: finAccount.id
+	 */
+	public List<Payment> findByFinAccountId(String finAccountId) {
+		return (List<Payment>) this
+				.getEntityManager()
+				.createQuery(
+						"select e from Payment e where e.clientId = :clientId and e.finAccount.id = :finAccountId",
+						Payment.class)
+				.setParameter("clientId",
+						Session.user.get().getClient().getId())
+				.setParameter("finAccountId", finAccountId).getResultList();
+	}
+	/**
 	 * Find by reference: bpAccount
 	 */
 	public List<Payment> findByBpAccount(BpAccount bpAccount) {
@@ -122,6 +144,45 @@ public class Payment_Service extends AbstractEntityService<Payment> {
 				.setParameter("clientId",
 						Session.user.get().getClient().getId())
 				.setParameter("bpAccountId", bpAccountId).getResultList();
+	}
+	/**
+	 * Find by reference: bpBankAccount
+	 */
+	public List<Payment> findByBpBankAccount(BankAccount bpBankAccount) {
+		return this.findByBpBankAccountId(bpBankAccount.getId());
+	}
+	/**
+	 * Find by ID of reference: bpBankAccount.id
+	 */
+	public List<Payment> findByBpBankAccountId(String bpBankAccountId) {
+		return (List<Payment>) this
+				.getEntityManager()
+				.createQuery(
+						"select e from Payment e where e.clientId = :clientId and e.bpBankAccount.id = :bpBankAccountId",
+						Payment.class)
+				.setParameter("clientId",
+						Session.user.get().getClient().getId())
+				.setParameter("bpBankAccountId", bpBankAccountId)
+				.getResultList();
+	}
+	/**
+	 * Find by reference: bpContact
+	 */
+	public List<Payment> findByBpContact(BpContact bpContact) {
+		return this.findByBpContactId(bpContact.getId());
+	}
+	/**
+	 * Find by ID of reference: bpContact.id
+	 */
+	public List<Payment> findByBpContactId(String bpContactId) {
+		return (List<Payment>) this
+				.getEntityManager()
+				.createQuery(
+						"select e from Payment e where e.clientId = :clientId and e.bpContact.id = :bpContactId",
+						Payment.class)
+				.setParameter("clientId",
+						Session.user.get().getClient().getId())
+				.setParameter("bpContactId", bpContactId).getResultList();
 	}
 	/**
 	 * Find by reference: lines

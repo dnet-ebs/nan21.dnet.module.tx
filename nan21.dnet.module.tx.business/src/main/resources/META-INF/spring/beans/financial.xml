@@ -7,6 +7,9 @@
 			http://www.springframework.org/schema/context 
 				http://www.springframework.org/schema/context/spring-context.xsd">
 
+	<bean id="FinancialOperation" scope="singleton" lazy-init="true"
+		class="net.nan21.dnet.module.tx.business.impl.financial.FinancialOperation_Service"/>				
+
 	<bean id="Payment" scope="singleton" lazy-init="true"
 		class="net.nan21.dnet.module.tx.business.ext.financial.service.Payment_Service"/>				
 

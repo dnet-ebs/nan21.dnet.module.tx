@@ -5,10 +5,12 @@
  */
 package net.nan21.dnet.module.tx.business.ext.purchase.service;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.joda.time.DateTime;
+import org.springframework.util.Assert;
 
 import net.nan21.dnet.core.api.exceptions.BusinessException;
 import net.nan21.dnet.module.md.business.api.org.IDocSequenceValueService;
@@ -32,6 +34,12 @@ public class PurchaseInvoice_Service extends
 
 	@Override
 	public void doConfirm(PurchaseInvoice invoice) throws BusinessException {
+
+		String msg = "Cannot confirm invoice `" + invoice.getDocNo() + "`.";
+		Assert.notNull(invoice.getPaymentMethod(), msg
+				+ "No payment method specified.");
+		Assert.notNull(invoice.getPaymentTerm(), msg
+				+ "No payment term specified.");
 
 		IAmountOwedService amountSrv = (IAmountOwedService) this
 				.findEntityService(AmountOwed.class);
@@ -143,7 +151,9 @@ public class PurchaseInvoice_Service extends
 	 */
 	@Override
 	protected void preInsert(PurchaseInvoice e) throws BusinessException {
-		if (e.getDocNo() == null) {
+		Assert.notNull(e.getCompany(), "An invoice must belong to a company!");
+		Assert.notNull(e.getDocType(), "Specify a document type for invoice!");
+		if (e.getDocNo() == null || "".equals(e.getDocNo())) {
 			IDocSequenceValueService srv = (IDocSequenceValueService) this
 					.findEntityService(DocSequenceValue.class);
 			DocSequenceValue seqVal = srv.getNextValue(e.getCompany().getId(),
@@ -165,7 +175,9 @@ public class PurchaseInvoice_Service extends
 		amount.setPurchaseInvoice(invoice);
 		amount.setCurrency(invoice.getCurrency());
 		amount.setSale(false);
-		amount.setAmount(invoice.getAmount());
+		amount.setAmountInitial(invoice.getAmount());
+		amount.setAmountDue(invoice.getAmount());
+		amount.setAmountPayed(new BigDecimal("0"));
 
 		if (paymentTerm != null) {
 			DateTime dueDate = new DateTime(invoice.getDocDate())

@@ -8,6 +8,8 @@ package net.nan21.dnet.module.tx.business.ext.sale.service;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.util.Assert;
+
 import net.nan21.dnet.core.api.exceptions.BusinessException;
 import net.nan21.dnet.core.api.session.Session;
 import net.nan21.dnet.module.bd.domain.impl.geo.Location;
@@ -74,14 +76,17 @@ public class SalesOrder_Service extends
 	 */
 	@Override
 	protected void preInsert(SalesOrder e) throws BusinessException {
-		IDocSequenceValueService srv = (IDocSequenceValueService) this
-				.findEntityService(DocSequenceValue.class);
-		DocSequenceValue seqVal = srv.getNextValue(e.getCompany().getId(), e
-				.getDocType().getId());
-		e.setDocNo(seqVal.getValue());
-		seqVal.setUsed(true);
-		this.getEntityManager().merge(seqVal);
-
+		Assert.notNull(e.getCompany(), "An order must belong to a company!");
+		Assert.notNull(e.getDocType(), "Specify a document type for order!");
+		if (e.getDocNo() == null || "".equals(e.getDocNo())) {
+			IDocSequenceValueService srv = (IDocSequenceValueService) this
+					.findEntityService(DocSequenceValue.class);
+			DocSequenceValue seqVal = srv.getNextValue(e.getCompany().getId(),
+					e.getDocType().getId());
+			e.setDocNo(seqVal.getValue());
+			seqVal.setUsed(true);
+			this.getEntityManager().merge(seqVal);
+		}
 		// add default billing / shipping address
 
 		String eql = "select e from " + Location.class.getSimpleName() + " e "

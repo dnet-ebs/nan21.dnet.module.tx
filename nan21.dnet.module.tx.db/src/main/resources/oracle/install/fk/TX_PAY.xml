@@ -24,11 +24,32 @@
 		referencedTableName="MD_ORG" 
 		referencedColumnNames="ID"/>
 </changeSet>
-<changeSet author="amathe" id="FK-5">
-	<addForeignKeyConstraint constraintName="FK_TX_PAY5" 
+<changeSet author="amathe" id="FK-4">
+	<addForeignKeyConstraint constraintName="FK_TX_PAY4" 
+		baseTableName="TX_PAY"
+		baseColumnNames="FINACCOUNT_ID"
+		referencedTableName="MD_FINACNT" 
+		referencedColumnNames="ID"/>
+</changeSet>
+<changeSet author="amathe" id="FK-10">
+	<addForeignKeyConstraint constraintName="FK_TX_PAY10" 
 		baseTableName="TX_PAY"
 		baseColumnNames="BPACCOUNT_ID"
 		referencedTableName="MD_BP_ACNT" 
+		referencedColumnNames="ID"/>
+</changeSet>
+<changeSet author="amathe" id="FK-11">
+	<addForeignKeyConstraint constraintName="FK_TX_PAY11" 
+		baseTableName="TX_PAY"
+		baseColumnNames="BPBANKACCOUNT_ID"
+		referencedTableName="MD_BANK_ACNT" 
+		referencedColumnNames="ID"/>
+</changeSet>
+<changeSet author="amathe" id="FK-12">
+	<addForeignKeyConstraint constraintName="FK_TX_PAY12" 
+		baseTableName="TX_PAY"
+		baseColumnNames="BPCONTACT_ID"
+		referencedTableName="MD_BP_CNTC" 
 		referencedColumnNames="ID"/>
 </changeSet>
 </databaseChangeLog>

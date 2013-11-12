@@ -11,6 +11,7 @@ import net.nan21.dnet.core.api.session.Session;
 import net.nan21.dnet.core.business.service.entity.AbstractEntityService;
 import net.nan21.dnet.module.bd.domain.impl.currency.Currency;
 import net.nan21.dnet.module.md.domain.impl.base.DocType;
+import net.nan21.dnet.module.md.domain.impl.base.PaymentTerm;
 import net.nan21.dnet.module.md.domain.impl.bp.BpAccount;
 import net.nan21.dnet.module.md.domain.impl.org.Org;
 import net.nan21.dnet.module.tx.domain.impl.purchase.PurchaseOrder;
@@ -142,6 +143,45 @@ public class PurchaseOrder_Service extends AbstractEntityService<PurchaseOrder> 
 				.setParameter("clientId",
 						Session.user.get().getClient().getId())
 				.setParameter("orgId", orgId).getResultList();
+	}
+	/**
+	 * Find by reference: paymentMethod
+	 */
+	public List<PurchaseOrder> findByPaymentMethod(DocType paymentMethod) {
+		return this.findByPaymentMethodId(paymentMethod.getId());
+	}
+	/**
+	 * Find by ID of reference: paymentMethod.id
+	 */
+	public List<PurchaseOrder> findByPaymentMethodId(String paymentMethodId) {
+		return (List<PurchaseOrder>) this
+				.getEntityManager()
+				.createQuery(
+						"select e from PurchaseOrder e where e.clientId = :clientId and e.paymentMethod.id = :paymentMethodId",
+						PurchaseOrder.class)
+				.setParameter("clientId",
+						Session.user.get().getClient().getId())
+				.setParameter("paymentMethodId", paymentMethodId)
+				.getResultList();
+	}
+	/**
+	 * Find by reference: paymentTerm
+	 */
+	public List<PurchaseOrder> findByPaymentTerm(PaymentTerm paymentTerm) {
+		return this.findByPaymentTermId(paymentTerm.getId());
+	}
+	/**
+	 * Find by ID of reference: paymentTerm.id
+	 */
+	public List<PurchaseOrder> findByPaymentTermId(String paymentTermId) {
+		return (List<PurchaseOrder>) this
+				.getEntityManager()
+				.createQuery(
+						"select e from PurchaseOrder e where e.clientId = :clientId and e.paymentTerm.id = :paymentTermId",
+						PurchaseOrder.class)
+				.setParameter("clientId",
+						Session.user.get().getClient().getId())
+				.setParameter("paymentTermId", paymentTermId).getResultList();
 	}
 	/**
 	 * Find by reference: lines

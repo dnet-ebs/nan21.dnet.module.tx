@@ -1,0 +1,20 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+
+<changeSet author="amathe" id="FK-1">
+	<addForeignKeyConstraint constraintName="FK_TX_FIN_OPR1" 
+		baseTableName="TX_FIN_OPR"
+		baseColumnNames="FINACCOUNT_ID"
+		referencedTableName="MD_FINACNT" 
+		referencedColumnNames="ID"/>
+</changeSet>
+<changeSet author="amathe" id="FK-2">
+	<addForeignKeyConstraint constraintName="FK_TX_FIN_OPR2" 
+		baseTableName="TX_FIN_OPR"
+		baseColumnNames="PAYMENT_ID"
+		referencedTableName="TX_PAY" 
+		referencedColumnNames="ID"/>
+</changeSet>
+</databaseChangeLog>

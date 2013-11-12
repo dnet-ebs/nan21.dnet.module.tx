@@ -24,7 +24,7 @@ Ext.define(Dnet.ns.tx + "InventoryOperation_Dc$Filter" , {
 		/* =========== controls =========== */
 		.addDateField({name:"eventDate_From", dataIndex:"eventDate_From", emptyText:"From" })
 		.addDateField({name:"eventDate_To", dataIndex:"eventDate_To", emptyText:"To" })
-		.addFieldContainer({name: "eventDate", fieldLabel:"Event Date"})
+		.addFieldContainer({name: "eventDate"})
 			.addChildrenTo("eventDate",["eventDate_From", "eventDate_To"])
 		.addLov({name:"product", dataIndex:"product", xtype:"md_Products_Lov", caseRestriction:"uppercase",
 			retFieldMapping: [{lovField:"id", dsField: "productId"} ]})

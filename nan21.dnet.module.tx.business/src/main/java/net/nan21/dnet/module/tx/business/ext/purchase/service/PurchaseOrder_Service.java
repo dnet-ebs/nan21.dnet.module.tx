@@ -5,6 +5,8 @@
  */
 package net.nan21.dnet.module.tx.business.ext.purchase.service;
 
+import org.springframework.util.Assert;
+
 import net.nan21.dnet.core.api.exceptions.BusinessException;
 import net.nan21.dnet.module.md.business.api.org.IDocSequenceValueService;
 import net.nan21.dnet.module.md.domain.impl.org.DocSequenceValue;
@@ -23,14 +25,14 @@ public class PurchaseOrder_Service extends
 
 	@Override
 	public void doConfirm(PurchaseOrder order) throws BusinessException {
-		// TODO Auto-generated method stub
-
+		order.setConfirmed(true);
+		this.getEntityManager().merge(order);
 	}
 
 	@Override
 	public void doUnConfirm(PurchaseOrder order) throws BusinessException {
-		// TODO Auto-generated method stub
-
+		order.setConfirmed(false);
+		this.getEntityManager().merge(order);
 	}
 
 	@Override
@@ -51,13 +53,17 @@ public class PurchaseOrder_Service extends
 	 */
 	@Override
 	protected void preInsert(PurchaseOrder e) throws BusinessException {
-		IDocSequenceValueService srv = (IDocSequenceValueService) this
-				.findEntityService(DocSequenceValue.class);
-		DocSequenceValue seqVal = srv.getNextValue(e.getCompany().getId(), e
-				.getDocType().getId());
-		e.setDocNo(seqVal.getValue());
-		seqVal.setUsed(true);
-		this.getEntityManager().merge(seqVal);
+		Assert.notNull(e.getCompany(), "An order must belong to a company!");
+		Assert.notNull(e.getDocType(), "Specify a document type for order!");
+		if (e.getDocNo() == null || "".equals(e.getDocNo())) {
+			IDocSequenceValueService srv = (IDocSequenceValueService) this
+					.findEntityService(DocSequenceValue.class);
+			DocSequenceValue seqVal = srv.getNextValue(e.getCompany().getId(),
+					e.getDocType().getId());
+			e.setDocNo(seqVal.getValue());
+			seqVal.setUsed(true);
+			this.getEntityManager().merge(seqVal);
+		}
 		super.preInsert(e);
 	}
 }

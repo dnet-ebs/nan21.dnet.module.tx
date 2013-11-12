@@ -10,6 +10,7 @@ import net.nan21.dnet.core.api.exceptions.BusinessException;
 import net.nan21.dnet.core.api.service.business.IEntityService;
 import net.nan21.dnet.module.bd.domain.impl.currency.Currency;
 import net.nan21.dnet.module.md.domain.impl.base.DocType;
+import net.nan21.dnet.module.md.domain.impl.base.PaymentTerm;
 import net.nan21.dnet.module.md.domain.impl.bp.BpAccount;
 import net.nan21.dnet.module.md.domain.impl.org.Org;
 import net.nan21.dnet.module.tx.domain.impl.purchase.PurchaseOrder;
@@ -85,6 +86,26 @@ public interface IPurchaseOrderService extends IEntityService<PurchaseOrder> {
 	 * Find by ID of reference: org.id
 	 */
 	public List<PurchaseOrder> findByOrgId(String orgId);
+
+	/**
+	 * Find by reference: paymentMethod
+	 */
+	public List<PurchaseOrder> findByPaymentMethod(DocType paymentMethod);
+
+	/**
+	 * Find by ID of reference: paymentMethod.id
+	 */
+	public List<PurchaseOrder> findByPaymentMethodId(String paymentMethodId);
+
+	/**
+	 * Find by reference: paymentTerm
+	 */
+	public List<PurchaseOrder> findByPaymentTerm(PaymentTerm paymentTerm);
+
+	/**
+	 * Find by ID of reference: paymentTerm.id
+	 */
+	public List<PurchaseOrder> findByPaymentTermId(String paymentTermId);
 
 	/**
 	 * Find by reference: lines

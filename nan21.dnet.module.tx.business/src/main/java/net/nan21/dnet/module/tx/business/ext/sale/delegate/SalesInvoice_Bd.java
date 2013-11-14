@@ -28,8 +28,8 @@ public class SalesInvoice_Bd extends AbstractBusinessDelegate {
 				.setParameter("invoiceId", invoiceId).getSingleResult();
 		SalesInvoice doc = this.getEntityManager().find(SalesInvoice.class,
 				invoiceId);
-		BigDecimal netAmount = new BigDecimal("0");
-		BigDecimal taxAmount = new BigDecimal("0");
+		BigDecimal netAmount = BigDecimal.ZERO;
+		BigDecimal taxAmount = BigDecimal.ZERO;
 
 		if (x[0] != null && x[1] != null) {
 			netAmount = new BigDecimal(x[0] + "");

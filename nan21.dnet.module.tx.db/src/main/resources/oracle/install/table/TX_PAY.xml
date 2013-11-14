@@ -56,7 +56,7 @@
 				<constraints nullable="false"/>
 			</column>
 			<column name="SOURCEDOCNO" type="varchar2(255)"/>
-			<column name="USAGE" type="varchar2(16)">
+			<column name="USG" type="varchar2(16)">
 				<constraints nullable="false"/>
 			</column>
 			<column name="VERSION" type="number(10)"/>

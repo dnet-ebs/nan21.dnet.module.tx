@@ -62,7 +62,7 @@ public class Payment extends AbstractAuditable {
 	private String direction;
 
 	@NotBlank
-	@Column(name = "USAGE", nullable = false, length = 16)
+	@Column(name = "USG", nullable = false, length = 16)
 	private String usage;
 
 	@NotBlank

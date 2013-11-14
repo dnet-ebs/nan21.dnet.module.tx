@@ -6,6 +6,7 @@
 package net.nan21.dnet.module.tx.business.ext.sale.service;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -85,20 +86,31 @@ public class SalesInvoiceLine_Service extends
 	 */
 	protected void calculateLineTaxesAndLineAmounts(SalesInvoiceLine line)
 			throws BusinessException {
+		int precision = line.getInvoice().getCurrency().getStandardPrecision();
+		RoundingMode rm = RoundingMode.HALF_UP;
 
 		// calculate line amounts
-		line.setNetAmount(line.getQuantity().multiply(line.getUnitPrice()));
+
+		BigDecimal netAmount = line.getQuantity().multiply(line.getUnitPrice())
+				.setScale(precision, rm);
+		BigDecimal taxAmount = BigDecimal.ZERO;
+		BigDecimal amount = netAmount;
+
+		line.setNetAmount(netAmount);
 
 		if (line.getTax() != null) {
 			SalesTax_Bd delegate = this.getBusinessDelegate(SalesTax_Bd.class);
 			List<SalesInvoiceLineTax> lineTaxes = new ArrayList<SalesInvoiceLineTax>();
 			delegate.createLineTax(line, null, lineTaxes);
-			BigDecimal taxAmount = new BigDecimal(0);
+
 			for (SalesInvoiceLineTax lineTax : lineTaxes) {
 				taxAmount = lineTax.getTaxAmount().add(taxAmount);
 			}
+			taxAmount = taxAmount.setScale(precision, rm);
+			amount = netAmount.add(taxAmount).setScale(precision, rm);
+
 			line.setTaxAmount(taxAmount);
-			line.setAmount(line.getNetAmount().add(taxAmount));
+			line.setAmount(amount);
 			this.getEntityManager().merge(line);
 			this.getEntityManager()
 					.createQuery(
